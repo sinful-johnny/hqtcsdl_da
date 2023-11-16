@@ -106,5 +106,4 @@ as
 	PRINT @cmd
 	EXEC (@cmd)
 	exec sp_addrolemember 'KHACHHANG', @idtk
-	
 go
