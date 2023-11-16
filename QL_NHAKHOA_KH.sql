@@ -13,7 +13,7 @@ create or alter view V_LICHDATKHAM
 as
 	select *
 	from LICH_DAT_KHAM as LDK
-	where	LDK.ID_KH = CURRENT_USER
+	where	LDK.ID_KH = CURRENT_USERffhfh
 go
 
 create or alter view V_LICHNHASI
