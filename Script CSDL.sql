@@ -256,7 +256,20 @@ GO
 ------------------------------------------
 --RANG BUOC TOAN VEN
 ------------------------------------------
-
+--Không cho phép thêm vào ngày khám và lịch làm việc đã có sẵn trong database
+create or alter trigger TR_0b on LICH_LAM_VIEC
+for insert
+as
+	if exists	(select*
+				from inserted I, LICH_LAM_VIEC LLV, LICH_DAT_KHAM LDK
+				where I.ID_NS = LLV.ID_NS
+					AND I.NGAYKHAM = LLV.NGAYKHAM
+					AND I.GIOKHAM = LLV.GIOKHAM)
+	begin
+		;throw 50000, N'Đã có lịch vào giờ đó', 1
+		rollback tran
+	end
+go
 --Một lịch đặt hẹn phải chọn một lịch nha sĩ với điều kiện lịch nha sĩ chưa có lịch đặt hẹn và ngày phải hợp lệ (không được là ngày trước ngày hiện tại)
 create or alter trigger TR_1 on LICH_DAT_KHAM for insert,update
 as
