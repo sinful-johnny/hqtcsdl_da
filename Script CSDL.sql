@@ -347,3 +347,24 @@ as
 		where	D.ID_LLV = LICH_LAM_VIEC.ID_LLV
 	end
 go
+
+--Không thêm thuốc vào đơn thuốc đã được tính tiền hoá đơn (ID_HOADON is not null)
+create or alter trigger TR_6 on THUOC_SD for insert, delete, update
+as
+	if exists	(
+					select *
+					from	inserted as I 
+							inner join DON_THUOC as DT on I.ID_DONTHUOC = DT.ID_DONTHUOC
+					where	DT.ID_HOADON is not null
+				)
+		or exists	(
+						select *
+						from	deleted as D
+							inner join DON_THUOC as DT on D.ID_DONTHUOC = DT.ID_DONTHUOC
+						where	DT.ID_HOADON is not null
+					)
+	begin
+		;throw 50003, N'Đơn thuốc đã được tính tiền',1
+		rollback tran
+	end
+go
