@@ -94,8 +94,8 @@ create or alter proc sp_ThemTK_KH
 as
 	
 	exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
-	declare @idtk varchar(5)
-	select @idtk = cast(cast((RAND()*(99999+1)) as int) as varchar(5))
+	declare @idtk varchar(255)
+	select @idtk = cast(NEWID() as varchar(255))
 	insert V_TTCANHAN(ID_TAIKHOAN,LOAITK,SDT,MATKHAU) values (@idtk,@loaitk,@sdt,@matkhau)
 	--create user [@idtk] for login [@sdt]
 	declare @cmd varchar(200), @username varchar(50)
