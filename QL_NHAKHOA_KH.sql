@@ -44,7 +44,7 @@ go
 
 create or alter view V_XEMDVSD
 as
-	select ID_DVSD,ID_LOAIDV, THANHTIEN, ID_HOADON
+	select ID_DVSD,ID_LOAIDV, THANHTIEN, ID_HOADON, DICHVU_SD.ID_BA
 	from DICHVU_SD , BENH_AN 
 	where DICHVU_SD.ID_BA = BENH_AN.ID_BA
 			and BENH_AN.ID_KH = CURRENT_USER
@@ -58,7 +58,7 @@ go
 
 create or alter view V_XEMDONTHUOC
 as
-	select ID_DONTHUOC, THANHTIEN, ID_HOADON
+	select ID_DONTHUOC, THANHTIEN, ID_HOADON, DON_THUOC.ID_BA
 	from DON_THUOC, BENH_AN
 	where	BENH_AN.ID_KH = CURRENT_USER
 			and BENH_AN.ID_BA = DON_THUOC.ID_BA
@@ -66,7 +66,7 @@ go
 
 create or alter view V_THUOCSD
 as
-	select	ID_THUOC, SOLUONG
+	select	ID_THUOC, SOLUONG, THUOC_SD.ID_DONTHUOC
 	from THUOC_SD, DON_THUOC, BENH_AN
 	where	BENH_AN.ID_KH = CURRENT_USER
 			and BENH_AN.ID_BA = DON_THUOC.ID_BA
@@ -88,22 +88,67 @@ go
 use QL_NHAKHOA
 go
 create or alter proc sp_ThemTK_KH
-	@loaitk nvarchar(20),
-	@sdt varchar(11),
-	@matkhau varchar(30)
+		@loaitk nvarchar(20),
+		@sdt varchar(11),
+		@matkhau varchar(30)
 as
-	
-	exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
-	declare @idtk varchar(255)
-	select @idtk = cast(NEWID() as varchar(255))
-	insert V_TTCANHAN(ID_TAIKHOAN,LOAITK,SDT,MATKHAU) values (@idtk,@loaitk,@sdt,@matkhau)
-	--create user [@idtk] for login [@sdt]
-	declare @cmd varchar(200), @username varchar(50)
+		begin tran
+		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
+		declare @idtk varchar(255)
+		select @idtk = cast(NEWID() as varchar(255))
+		insert V_TTCANHAN(ID_TAIKHOAN,LOAITK,SDT,MATKHAU) values (@idtk,@loaitk,@sdt,@matkhau)
+		--create user [@idtk] for login [@sdt]
+		declare @cmd varchar(200), @username varchar(50)
 
-	set @cmd = ' 
-	   USE QL_NHAKHOA
-	   CREATE USER [' + @idtk + '] FOR LOGIN '+ '[' + @sdt + ']'
-	PRINT @cmd
-	EXEC (@cmd)
-	exec sp_addrolemember 'KHACHHANG', @idtk
+		set @cmd = ' 
+		   USE QL_NHAKHOA
+		   CREATE USER [' + @idtk + '] FOR LOGIN '+ '[' + @sdt + ']'
+		PRINT @cmd
+		EXEC (@cmd)
+		exec sp_addrolemember 'KHACHHANG', @idtk
+	commit tran
 go
+
+create or alter proc sp_XemLichKham 
+as
+	select *
+	from V_LICHDATKHAM
+go
+
+create or alter proc sp_XemLichNS
+as
+	select *
+	from V_LICHNHASI
+go
+
+create or alter proc sp_XemBenhAn
+as
+	select *
+	from V_BENHAN
+go
+
+create or alter proc sp_XemDonThuoc
+	@mabenhan varchar(255)
+as
+	select *
+	from V_XEMDONTHUOC
+	where ID_BA = @mabenhan
+go
+
+create or alter proc sp_XemThuocSD
+	@madonthuoc varchar(255)
+as
+	select *
+	from V_THUOCSD
+	where ID_DONTHUOC = @madonthuoc
+go
+
+create or alter proc sp_XemDVSD
+	@mabenhan varchar(255)
+as
+	select *
+	from V_XEMDVSD
+	where	ID_BA = @mabenhan
+go
+
+
