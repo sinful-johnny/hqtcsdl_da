@@ -92,7 +92,6 @@ create or alter proc sp_ThemTK
 		@sdt varchar(11),
 		@matkhau varchar(30)
 as
-		begin tran
 		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
 		declare @idtk varchar(255)
 		select @idtk = cast(NEWID() as varchar(255))
@@ -106,7 +105,6 @@ as
 		PRINT @cmd
 		EXEC (@cmd)
 		exec sp_addrolemember 'KHACHHANG', @idtk
-	commit tran
 go
 
 create or alter proc sp_KH_XemLichKham 
@@ -114,18 +112,27 @@ as
 	select *
 	from V_KH_LICHDATKHAM
 go
+grant EXECUTE ON OBJECT::sp_KH_XemLichKham
+    TO KHACHHANG;  
+GO
 
 create or alter proc sp_KH_XemLichNS
 as
 	select *
 	from V_KH_LICHNHASI
 go
+grant EXECUTE ON OBJECT::sp_KH_XemLichNS
+    TO KHACHHANG;  
+GO
 
 create or alter proc sp_KH_XemBenhAn
 as
 	select *
 	from V_KH_BENHAN
 go
+grant EXECUTE ON OBJECT::sp_KH_XemBenhAn
+    TO KHACHHANG;  
+GO
 
 create or alter proc sp_KH_XemDonThuoc
 	@maBenhAn varchar(255)
@@ -134,6 +141,9 @@ as
 	from V_KH_XEMDONTHUOC
 	where ID_BA = @maBenhAn
 go
+grant EXECUTE ON OBJECT::sp_KH_XemDonThuoc
+    TO KHACHHANG;  
+GO
 
 create or alter proc sp_KH_XemThuocSD
 	@madonthuoc varchar(255)
@@ -142,6 +152,9 @@ as
 	from V_KH_THUOCSD
 	where ID_DONTHUOC = @madonthuoc
 go
+grant EXECUTE ON OBJECT::sp_KH_XemThuocSD
+    TO KHACHHANG;  
+GO
 
 create or alter proc sp_KH_XemDVSD
 	@maBenhAn varchar(255)
@@ -150,6 +163,10 @@ as
 	from V_KH_XEMDVSD
 	where	ID_BA = @maBenhAn
 go
+grant EXECUTE ON OBJECT::sp_KH_XemDVSD
+    TO KHACHHANG;  
+GO
+
 
 create or alter proc sp_KH_ThemLichDatKham
 	@id_llv varchar(255)
@@ -171,6 +188,10 @@ as
 
 	commit tran
 go
+grant EXECUTE ON OBJECT::sp_KH_ThemLichDatKham 
+    TO KHACHHANG;  
+GO
+
 
 create or alter proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
@@ -204,6 +225,20 @@ as
 		where ID_TAIKHOAN = CURRENT_USER
 	commit tran
 go
+grant EXECUTE ON OBJECT::sp_KH_SuaTTCaNhan 
+    TO KHACHHANG;  
+GO
 
+
+create or alter proc sp_KH_XemTTCaNhan
+as
+	begin tran
+		select *
+		from V_KH_TTCANHAN
+	commit tran
+go
+grant EXECUTE ON OBJECT::sp_KH_XemTTCaNhan 
+    TO KHACHHANG;  
+GO
 
 

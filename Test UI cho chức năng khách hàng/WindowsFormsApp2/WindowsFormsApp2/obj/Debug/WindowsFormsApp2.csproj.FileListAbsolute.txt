@@ -1,0 +1,28 @@
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.SuggestedBindingRedirects.cache
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.dll
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.xml
+D:\Download\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.dll
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.xml
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
