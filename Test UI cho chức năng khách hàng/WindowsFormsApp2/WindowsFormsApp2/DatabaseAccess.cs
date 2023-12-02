@@ -30,5 +30,14 @@ namespace WindowsFormsApp2
                 return output;
             }
         }
+        public List<BENH_AN> getBENH_ANs(string USERID, string PASSWORD)
+        {
+            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
+            {
+                var output = connection.Query<BENH_AN>($"exec sp_KH_XemBenhAn").ToList();
+                return output;
+            }
+        }
     }
 }

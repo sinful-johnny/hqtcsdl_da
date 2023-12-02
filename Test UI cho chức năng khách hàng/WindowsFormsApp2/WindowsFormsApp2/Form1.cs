@@ -14,6 +14,7 @@ namespace WindowsFormsApp2
     public partial class Form1 : Form
     {
         List<TAI_KHOAN> data = new List<TAI_KHOAN>();
+        List<BENH_AN> dsBenhAn = new List<BENH_AN>();
         public Form1()
         {
             InitializeComponent();
@@ -36,14 +37,28 @@ namespace WindowsFormsApp2
             foreach(TAI_KHOAN tAI_KHOAN in data)
             {
                 ListViewItem newItem = new ListViewItem(tAI_KHOAN.ID_TAIKHOAN);
+                newItem.SubItems.Add(tAI_KHOAN.HOTEN);
                 newItem.SubItems.Add(tAI_KHOAN.SDT);
-                newItem.SubItems.Add(tAI_KHOAN.MATKHAU);
+                newItem.SubItems.Add(tAI_KHOAN.NGAYSINH.ToString());
                 newItem.SubItems.Add(tAI_KHOAN.LOAITK);
                 ttcanhan.Items.Add(newItem);
             }
 
         }
-        
+        private void UpdateBenhAn()
+        {
+            foreach (BENH_AN benhAn in dsBenhAn)
+            {
+                ListViewItem newItem = new ListViewItem(benhAn.ID_BA);
+                newItem.SubItems.Add(benhAn.ID_KH);
+                newItem.SubItems.Add(benhAn.ID_NS);
+                newItem.SubItems.Add(benhAn.NGAYKHAM.ToString());
+                benh_an.Items.Add(newItem);
+                //MessageBox.Show(benhAn.Info);
+            }
+
+        }
+
         private void dsKH_SelectedIndexChanged(object sender, EventArgs e)
         {
             return;
@@ -54,8 +69,10 @@ namespace WindowsFormsApp2
             DatabaseAccess db = new DatabaseAccess();
             //data = db.GetTAI_KHOANs();
             data = db.loginDB(username.Text, password.Text);
+            dsBenhAn = db.getBENH_ANs(username.Text, password.Text);
             //UpdateDsKH();
             UpdateListView();
+            UpdateBenhAn();
             //Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
             //MessageBox.Show(helper.connectionString);
         }
@@ -106,9 +123,17 @@ namespace WindowsFormsApp2
         {
             ttcanhan.View = View.Details;
             ttcanhan.Columns.Add("ID_TAIKHOAN", 100, HorizontalAlignment.Left);
+            ttcanhan.Columns.Add("HOTEN", 100, HorizontalAlignment.Left);
             ttcanhan.Columns.Add("SDT", 100);
-            ttcanhan.Columns.Add("MAT KHAU", 100);
+            ttcanhan.Columns.Add("NGAY SINH", 100);
+            //ttcanhan.Columns.Add("MAT KHAU", 100);
             ttcanhan.Columns.Add("LOAI TAI KHOAN", 100);
+
+            benh_an.View = View.Details;
+            benh_an.Columns.Add("ID BENH AN", 100);
+            benh_an.Columns.Add("ID KHACH HANG", 100);
+            benh_an.Columns.Add("ID NHA SI", 100);
+            benh_an.Columns.Add("NGAY KHAM", 100);
         }
     }
 }

@@ -33,6 +33,8 @@
             this.password = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ttcanhan = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.benh_an = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // button1
@@ -79,15 +81,35 @@
             this.ttcanhan.HideSelection = false;
             this.ttcanhan.Location = new System.Drawing.Point(12, 121);
             this.ttcanhan.Name = "ttcanhan";
-            this.ttcanhan.Size = new System.Drawing.Size(776, 64);
+            this.ttcanhan.Size = new System.Drawing.Size(776, 51);
             this.ttcanhan.TabIndex = 6;
             this.ttcanhan.UseCompatibleStateImageBehavior = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 179);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Bệnh án";
+            // 
+            // benh_an
+            // 
+            this.benh_an.HideSelection = false;
+            this.benh_an.Location = new System.Drawing.Point(12, 198);
+            this.benh_an.Name = "benh_an";
+            this.benh_an.Size = new System.Drawing.Size(776, 81);
+            this.benh_an.TabIndex = 8;
+            this.benh_an.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.benh_an);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.ttcanhan);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.password);
@@ -107,6 +129,8 @@
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView ttcanhan;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView benh_an;
     }
 }
 
