@@ -13,6 +13,7 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+        DatabaseAccess db;
         List<TAI_KHOAN> data = new List<TAI_KHOAN>();
         List<BENH_AN> dsBenhAn = new List<BENH_AN>();
         public Form1()
@@ -66,10 +67,11 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DatabaseAccess db = new DatabaseAccess();
+
             //data = db.GetTAI_KHOANs();
-            data = db.loginDB(username.Text, password.Text);
-            dsBenhAn = db.getBENH_ANs(username.Text, password.Text);
+            db = new DatabaseAccess(username.Text, password.Text);
+            data = db.loginDB();
+            dsBenhAn = db.getBENH_ANs();
             //UpdateDsKH();
             UpdateListView();
             UpdateBenhAn();
@@ -134,6 +136,16 @@ namespace WindowsFormsApp2
             benh_an.Columns.Add("ID KHACH HANG", 100);
             benh_an.Columns.Add("ID NHA SI", 100);
             benh_an.Columns.Add("NGAY KHAM", 100);
+        }
+
+        private void benh_an_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //benh_an.SelectedItems[0].Text
+            if(benh_an.SelectedItems.Count > 0)
+            {
+                Form2 form2 = new Form2(benh_an.SelectedItems[0].Text, this, username.Text, password.Text);
+                form2.Show();
+            }
         }
     }
 }

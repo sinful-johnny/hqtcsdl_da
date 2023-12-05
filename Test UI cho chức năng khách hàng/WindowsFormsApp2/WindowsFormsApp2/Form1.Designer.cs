@@ -102,6 +102,7 @@
             this.benh_an.Size = new System.Drawing.Size(776, 81);
             this.benh_an.TabIndex = 8;
             this.benh_an.UseCompatibleStateImageBehavior = false;
+            this.benh_an.SelectedIndexChanged += new System.EventHandler(this.benh_an_SelectedIndexChanged);
             // 
             // Form1
             // 

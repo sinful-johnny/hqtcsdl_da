@@ -167,6 +167,17 @@ grant EXECUTE ON OBJECT::sp_KH_XemDVSD
     TO KHACHHANG;  
 GO
 
+create or alter proc sp_KH_XemChiTietDV
+	@maDVSD varchar(255)
+as
+	select *
+	from LOAI_DV as LDV inner join DICHVU_SD as DVSD on LDV.ID_LOAIDV = DVSD.ID_LOAIDV
+	where DVSD.ID_DVSD = @maDVSD
+go
+grant EXECUTE ON OBJECT::sp_KH_XemChiTietDV
+    TO KHACHHANG;  
+GO
+
 
 create or alter proc sp_KH_ThemLichDatKham
 	@id_llv varchar(255)

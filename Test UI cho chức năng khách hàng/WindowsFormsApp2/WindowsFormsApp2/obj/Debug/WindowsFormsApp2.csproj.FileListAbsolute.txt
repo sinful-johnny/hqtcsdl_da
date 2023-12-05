@@ -26,3 +26,5 @@ C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng kh
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form2.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form3.resources
