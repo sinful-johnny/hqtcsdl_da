@@ -56,21 +56,12 @@ as
 	from THUOC
 go
 
-create or alter view V_KH_XEMDONTHUOC
-as
-	select ID_DONTHUOC, THANHTIEN, ID_HOADON, DON_THUOC.ID_BA
-	from DON_THUOC, BENH_AN
-	where	BENH_AN.ID_KH = CURRENT_USER
-			and BENH_AN.ID_BA = DON_THUOC.ID_BA
-go
-
 create or alter view V_KH_THUOCSD
 as
-	select	ID_THUOC, SOLUONG, THUOC_SD.ID_DONTHUOC
-	from THUOC_SD, DON_THUOC, BENH_AN
+	select	ID_THUOC, SOLUONG, THUOC_SD.ID_BA
+	from THUOC_SD, BENH_AN
 	where	BENH_AN.ID_KH = CURRENT_USER
-			and BENH_AN.ID_BA = DON_THUOC.ID_BA
-			and DON_THUOC.ID_DONTHUOC = DON_THUOC.ID_DONTHUOC
+			and BENH_AN.ID_BA = THUOC_SD.ID_BA
 go
 
 grant select,update on V_KH_TTCANHAN to KHACHHANG
@@ -81,7 +72,6 @@ grant select, insert, update on V_KH_LICHDATKHAM to KHACHHANG
 grant select on V_KH_XEMDV to KHACHHANG
 grant select on V_KH_XEMDVSD to KHACHHANG
 grant select on V_KH_XEMTHUOC to KHACHHANG
-grant select on V_KH_XEMDONTHUOC to KHACHHANG
 grant select on V_KH_THUOCSD to KHACHHANG
 go
 
@@ -146,11 +136,11 @@ grant EXECUTE ON OBJECT::sp_KH_XemDonThuoc
 GO
 
 create or alter proc sp_KH_XemThuocSD
-	@madonthuoc varchar(255)
+	@idBenhAn varchar(255)
 as
 	select *
 	from V_KH_THUOCSD
-	where ID_DONTHUOC = @madonthuoc
+	where ID_BA = @idBenhAn
 go
 grant EXECUTE ON OBJECT::sp_KH_XemThuocSD
     TO KHACHHANG;  

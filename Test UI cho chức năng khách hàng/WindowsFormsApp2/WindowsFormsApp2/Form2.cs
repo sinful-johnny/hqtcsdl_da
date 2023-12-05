@@ -42,7 +42,7 @@ namespace WindowsFormsApp2
             dv_sd.Columns.Add("THANH TIEN", 100);
             dv_sd.Columns.Add("HOA DON", 100);
 
-            dON_THUOCs = db.GetDON_THUOCs(ID_BA);
+            //dON_THUOCs = db.GetDON_THUOCs(ID_BA);
             dICHVU_SDs = db.GetDICHVU_SDs(ID_BA);  
             update_ListView_HOADON();
             update_ListView_DVSD();

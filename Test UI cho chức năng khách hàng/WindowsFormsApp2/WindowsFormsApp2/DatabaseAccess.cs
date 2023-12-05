@@ -49,16 +49,16 @@ namespace WindowsFormsApp2
             }
         }
 
-        public List<DON_THUOC> GetDON_THUOCs(string ID_BA)
-        {
-
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
-            {
-                var output = connection.Query<DON_THUOC>($"exec sp_KH_XemDonThuoc '" + ID_BA + "'").ToList();
-                return output;
-            }
-        }
+         //public List<DON_THUOC> GetDON_THUOCs(string ID_BA)
+        //{
+         //
+         //   Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+         //   using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
+         //   {
+         //       var output = connection.Query<DON_THUOC>($"exec sp_KH_XemDonThuoc '" + ID_BA + "'").ToList();
+         //       return output;
+         //   }
+        //}
         public List<DICHVU_SD> GetDICHVU_SDs(string ID_BA)
         {
 
