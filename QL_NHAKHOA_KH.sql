@@ -124,10 +124,6 @@ grant EXECUTE ON OBJECT::sp_KH_XemBenhAn
     TO KHACHHANG;  
 GO
 
-grant EXECUTE ON OBJECT::sp_KH_XemDonThuoc
-    TO KHACHHANG;  
-GO
-
 create or alter proc sp_KH_XemThuocSD
 	@idBenhAn varchar(255)
 as
@@ -135,6 +131,7 @@ as
 	from V_KH_THUOCSD
 	where ID_BA = @idBenhAn
 go
+
 grant EXECUTE ON OBJECT::sp_KH_XemThuocSD
     TO KHACHHANG;  
 GO
@@ -243,6 +240,24 @@ as
 	commit tran
 go
 grant EXECUTE ON OBJECT::sp_KH_XemTTCaNhan 
+    TO KHACHHANG;  
+GO
+
+create or alter proc sp_KH_XemDSThuoc
+as
+	select *
+	from V_KH_XEMTHUOC
+go
+grant EXECUTE ON OBJECT::sp_KH_XemDSThuoc 
+    TO KHACHHANG;  
+GO
+
+create or alter proc sp_KH_XemDSDichVu
+as
+	select *
+	from V_KH_XEMDV
+go
+grant EXECUTE ON OBJECT::sp_KH_XemDSDichVu
     TO KHACHHANG;  
 GO
 

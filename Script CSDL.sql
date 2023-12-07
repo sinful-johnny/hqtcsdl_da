@@ -1,13 +1,13 @@
 ﻿USE MASTER
 GO
 
-IF DB_ID('QL_NHAKHOA1') IS NOT NULL --KTR CSDL QLLOPHOC TỒN TẠI CHƯA
-	DROP DATABASE QL_NHAKHOA1 --XÓA CSDL
+IF DB_ID('QL_NHAKHOA') IS NOT NULL --KTR CSDL QLLOPHOC TỒN TẠI CHƯA
+	DROP DATABASE QL_NHAKHOA --XÓA CSDL
 	GO
-CREATE DATABASE QL_NHAKHOA1 --TẠO CSDL
+CREATE DATABASE QL_NHAKHOA --TẠO CSDL
 GO
 
-USE QL_NHAKHOA1
+USE QL_NHAKHOA
 GO
 
 CREATE TABLE TAI_KHOAN(
@@ -250,7 +250,7 @@ as
 					from inserted as I, THUOC as T, SO_LUONG_TON_KHO as SLTK
 					where	I.ID_THUOC = T.ID_THUOC
 							and T.ID_THUOC = SLTK.ID_THUOC
-							and I.SOLUONG > SLTK.SOLUONG
+							and (I.SOLUONG > SLTK.SOLUONG or datediff(day,T.NGAYHETHAN, getdate()) > 0) 
 				)
 	begin
 		;throw 50001, N'Số lượng còn lại không đủ cho yêu cầu sử dụng',1
@@ -291,5 +291,34 @@ as
 		set TRANGTHAI = N'Trống'
 		from deleted as D
 		where	D.ID_LLV = LICH_LAM_VIEC.ID_LLV
+	end
+go
+
+--Thuốc có ngày hết hạn hợp lệ
+create or  alter trigger TR_6 on THUOC for insert,update
+as
+	if exists	(
+					select *
+					from inserted as I
+					where datediff(day,I.NGAYHETHAN,getdate()) >= 0
+				)
+	begin
+		;throw 50006, N'Không thể thêm thuốc đã hết hạn',1
+		rollback tran
+	end
+go
+
+--Mật khẩu không được trống và loại tài khoản phải hợp lệ
+create or alter trigger TR_7 on TAI_KHOAN for insert, update
+as
+	if exists	(
+					select *
+					from inserted as I
+					where	I.MATKHAU = ' '
+							or I.LOAITK not in ('KH','NS','NV','QTV')
+				)
+	begin
+		;throw 50007, N'Tài khoản không hợp lệ',1
+		rollback tran
 	end
 go
