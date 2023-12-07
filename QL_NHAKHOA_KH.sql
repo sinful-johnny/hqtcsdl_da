@@ -124,13 +124,6 @@ grant EXECUTE ON OBJECT::sp_KH_XemBenhAn
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemDonThuoc
-	@maBenhAn varchar(255)
-as
-	select *
-	from V_KH_XEMDONTHUOC
-	where ID_BA = @maBenhAn
-go
 grant EXECUTE ON OBJECT::sp_KH_XemDonThuoc
     TO KHACHHANG;  
 GO

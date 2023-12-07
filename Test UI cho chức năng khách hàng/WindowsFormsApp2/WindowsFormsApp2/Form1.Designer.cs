@@ -107,12 +107,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(340, 34);
+            this.button2.Location = new System.Drawing.Point(349, 31);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 49);
+            this.button2.Size = new System.Drawing.Size(146, 54);
             this.button2.TabIndex = 9;
-            this.button2.Text = "Edit Personal Information";
+            this.button2.Text = "Edit personal Informations";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 

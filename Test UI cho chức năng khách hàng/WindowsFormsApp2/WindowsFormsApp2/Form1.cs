@@ -147,5 +147,10 @@ namespace WindowsFormsApp2
                 form2.Show();
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
