@@ -322,3 +322,17 @@ as
 		rollback tran
 	end
 go
+
+--Ngày sinh không được là ngày sau ngày hiện tại
+create or alter trigger TR_8 on TAI_KHOAN for insert,update
+as
+	if exists	(
+					select *
+					from inserted
+					where datediff(day,'2023-12-30',getdate()) > 0
+				)
+	begin
+		;throw 50008, N'Ngày sinh không hợp lệ', 1
+		rollback tran
+	end
+go
