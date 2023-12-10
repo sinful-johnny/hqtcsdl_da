@@ -77,15 +77,18 @@ go
 
 use QL_NHAKHOA
 go
-create or alter proc sp_ThemTK
-		@loaitk nvarchar(20),
+create proc sp_ThemTK
+		@hoten nvarchar(30),
 		@sdt varchar(11),
-		@matkhau varchar(30)
+		@ngaysinh date,
+		@email varchar(30),
+		@matkhau varchar(30),
+		@loaitk nvarchar(20)
 as
 		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
 		declare @idtk varchar(255)
 		select @idtk = cast(NEWID() as varchar(255))
-		insert V_KH_TTCANHAN(ID_TAIKHOAN,LOAITK,SDT,MATKHAU) values (@idtk,@loaitk,@sdt,@matkhau)
+		insert V_KH_TTCANHAN(ID_TAIKHOAN,HOTEN,SDT,NGAYSINH,EMAIL,MATKHAU,LOAITK) values (@idtk,@hoten,@sdt,@ngaysinh,@email,@matkhau,@loaitk)
 		--create user [@idtk] for login [@sdt]
 		declare @cmd varchar(200), @username varchar(50)
 
@@ -97,7 +100,7 @@ as
 		exec sp_addrolemember 'KHACHHANG', @idtk
 go
 
-create or alter proc sp_KH_XemLichKham 
+create proc sp_KH_XemLichKham 
 as
 	select *
 	from V_KH_LICHDATKHAM
@@ -106,7 +109,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemLichKham
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemLichNS
+create proc sp_KH_XemLichNS
 as
 	select *
 	from V_KH_LICHNHASI
@@ -115,7 +118,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemLichNS
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemBenhAn
+create proc sp_KH_XemBenhAn
 as
 	select *
 	from V_KH_BENHAN
@@ -124,7 +127,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemBenhAn
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemThuocSD
+create proc sp_KH_XemThuocSD
 	@idBenhAn varchar(255)
 as
 	select *
@@ -136,7 +139,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemThuocSD
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemDVSD
+create proc sp_KH_XemDVSD
 	@maBenhAn varchar(255)
 as
 	select *
@@ -147,7 +150,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemDVSD
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemChiTietDV
+create proc sp_KH_XemChiTietDV
 	@maLoaiDV varchar(255)
 as
 	select *
@@ -158,7 +161,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemChiTietDV
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemChiTietThuoc
+create proc sp_KH_XemChiTietThuoc
 	@idThuoc varchar(255)
 as
 	select *
@@ -170,7 +173,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemChiTietThuoc
 GO
 
 
-create or alter proc sp_KH_ThemLichDatKham
+create proc sp_KH_ThemLichDatKham
 	@id_llv varchar(255)
 as
 	begin tran
@@ -195,7 +198,7 @@ grant EXECUTE ON OBJECT::sp_KH_ThemLichDatKham
 GO
 
 
-create or alter proc sp_KH_SuaTTCaNhan
+create proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
 	@ngaysinh date,
 	@email varchar(30)
@@ -232,7 +235,7 @@ grant EXECUTE ON OBJECT::sp_KH_SuaTTCaNhan
 GO
 
 
-create or alter proc sp_KH_XemTTCaNhan
+create proc sp_KH_XemTTCaNhan
 as
 	begin tran
 		select *
@@ -243,7 +246,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemTTCaNhan
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemDSThuoc
+create proc sp_KH_XemDSThuoc
 as
 	select *
 	from V_KH_XEMTHUOC
@@ -252,7 +255,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemDSThuoc
     TO KHACHHANG;  
 GO
 
-create or alter proc sp_KH_XemDSDichVu
+create proc sp_KH_XemDSDichVu
 as
 	select *
 	from V_KH_XEMDV

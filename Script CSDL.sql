@@ -259,19 +259,19 @@ as
 go
 
 --Nha sĩ không được cập nhật sửa đổi những lịch khám đã có khách đặt
-create or alter trigger TR_4 on LICH_LAM_VIEC for insert,delete, update
-as
-	if exists	(
-					select *
-					from inserted as I
-					where	I.TRANGTHAI != N'Trống'
-							or I.ID_LLV in (select LDK.ID_LLV from LICH_DAT_KHAM as LDK)
-				)
-	begin
-		;throw 50002, N'Lịch làm việc đã được đặt',1
-		rollback tran
-	end
-go
+--create or alter trigger TR_4 on LICH_LAM_VIEC for delete, update
+--as
+--	select * from inserted
+--	if exists	(
+--					select *
+--					from inserted as I
+--					where	I.TRANGTHAI != N'Trống'
+--				)
+--	begin
+--		;throw 50002, N'Lịch làm việc đã được đặt',1
+--		rollback tran
+--	end
+--go
 
 --Khi xoá một lịch đặt hẹn, trạng thái của lịch làm việc mà lịch đặt hẹn đó giữ phải được trả lại trạng thái “Trống”
 create or alter trigger TR_5 on LICH_DAT_KHAM for delete, update
