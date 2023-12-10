@@ -4,93 +4,19 @@ GO
 -- CHỨC NĂNG CHO QUẢN TRỊ VIÊN
 -- CHỨC NĂNG TẠO ID TÀI KHOẢN
 
-CREATE OR ALTER PROC TAOMATAIKHOAN
-	@ID_TK VARCHAR(5) OUT
+CREATE OR ALTER PROC sp_TAOID
+	@ID VARCHAR(255) OUTPUT
 AS
 BEGIN
-	SET @ID_TK =  CAST(NEWID() as varchar(255))
+	SET @ID =  CAST(NEWID() AS VARCHAR(255))
+	RETURN
 END
 GO
--- CHỨC NĂNG KIỂM TRA TÍNH HỢP LỆ CỦA TÊN ĐĂNG NHẬP
-CREATE OR ALTER PROC KIEMTRA_TENDANGNHAP
-	@tenDN NVARCHAR(30)
-AS
-BEGIN
-	IF((SELECT LEN(@tenDN)) < 5)
-		BEGIN
-			RETURN 1--KHÔNG HỢP LỆ
-		END
-	ELSE
-		BEGIN
-			RETURN 0
-		END
-END
-GO
---CHỨC NĂNG KIỂM TRA SĐT
-CREATE OR ALTER PROC KIEM_TRA_SDT
-	@SDT char(11)
-AS
-BEGIN
-	IF((SELECT LEN(@SDT))=10 or (SELECT LEN(@SDT))=11)
-		BEGIN
-			RETURN 1--HỢP LỆ
-		END
-	ELSE
-		BEGIN
-			RETURN 0--KHÔNG HỢP LỆ
-		END
-	
-END
-GO
---CHỨC NĂNG KIỂM TRA NGÀY SINH
-CREATE OR ALTER PROC KIEMTRA_NGAYSINH
-	@ngaysinh DATE
-AS
-BEGIN
-	IF(@ngaysinh>=GETDATE())
-		BEGIN
-			RETURN 1--sai
-		END
-	ELSE IF (YEAR(GETDATE()) - YEAR(@ngaysinh) < 16)
-		BEGIN
-			RETURN 1--CHƯA ĐỦ 16T ĐỂ LẬP TÀI KHOẢN
-		END
-	ELSE
-		BEGIN
-			RETURN 0
-		END
-END
-GO
---CHỨC NĂNG KIỂM TRA EMAIL HỢP LỆ
-CREATE OR ALTER PROC KIEMTRA_EMAIL
-	@email VARCHAR(30)
-AS
-BEGIN
-	IF (@email = '' OR @email NOT LIKE '_%@__%.__%')
-		RETURN 1 --KHÔNG HỢP LỆ
-	ELSE 
-		RETURN 0 --HỢP LỆ
-END
-GO
---kIỂM TRA LOẠI TÀI KHOẢN
-CREATE OR ALTER PROC KIEMTRA_LOAITAIKHOAN
-	@loaiTK NVARCHAR(20)
-AS
-BEGIN
-	
-	IF (@loaiTK = 'NV' OR @loaiTK = 'NS' OR @loaiTK = 'KH')
-	BEGIN
-		return 0-- HỢP LỆ
-	END
-	ELSE
-	BEGIN
-		return 1-- KHÔNG HỢP LỆ
-	END
-END
-GO
--- CHỨC NĂNG THÊM NHÂN VIÊN, NHA SĨ, KHÁCH HÀNG 
-CREATE OR ALTER PROC THEM_TAIKHOAN_NGUOIDUNG
-	@tentaikhoan NVARCHAR(30),
+
+--=========================THÊM TÀI KHOẢN=======================================
+
+CREATE OR ALTER PROC sp_THEM_TAIKHOAN_NGUOIDUNG
+	@tentaikhoan NVARCHAR(255),
 	@sdt CHAR(11),
 	@ngaysinh DATE,
 	@email VARCHAR(30),
@@ -101,95 +27,470 @@ AS
 BEGIN TRAN
 	--TẠO ID TÀI KHOẢN MỚI
 	DECLARE @ID_TK VARCHAR(255)
-	EXEC TAOMATAIKHOAN @ID_TK
-	--kiểm tra tên đăng nhập phải lớn hơn 5 ký tự
-	DECLARE @kiemtraTDN INT
-	EXEC @kiemtraTDN = KIEMTRA_TENDANGNHAP @tentaikhoan
-	IF(@kiemtraTDN = 1)
-		BEGIN
-			SET @error = N'Tên đăng nhập phải lớn hơn 5 ký tự'
-			RAISERROR(N'Tên đăng nhập phải lớn hơn 5 ký tự', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
-	--KIỂM TRA SĐT 10 HOẶC 11 SỐ
-	DECLARE @kiemtraSDT INT
-	EXEC @kiemtraSDT = KIEM_TRA_SDT @sdt
-	IF (@kiemtraSDT = 0)
-		BEGIN
-			SET @error = N'Số điện thoại không hợp lệ'
-			RAISERROR(N'Số điện thoại không hợp lệ', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
-	 
-	--KIỂM TRA NGÀY SINH PHẢI LỚN HƠN NGÀY HIỆN TẠI VÀ NGƯỜI DÙNG PHẢI > 16 TUỔI
-	DECLARE @kiemtrangaysinh INT
-	EXEC @kiemtrangaysinh = KIEMTRA_NGAYSINH @ngaySinh
-	IF(@kiemtrangaysinh = 1)
-		BEGIN
-			SET @error = N'Ngày sinh không hợp lệ'
-			RAISERROR(N'Ngày sinh không hợp lệ', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
-	--KIỂM TRA EMAIL CÓ HỢP LỆ HAY KHÔNG
-	DECLARE @kiemtraemail INT
-	EXEC @kiemtraemail = KIEMTRA_EMAIL @email
-	IF(@kiemtrangaysinh = 1)
-		BEGIN
-			SET @error = N'Email không hợp lệ'
-			RAISERROR(N'Email không hợp lệ.', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
-	--KIỂM TRA PASSWORD CÓ BỊ TRỐNG KHÔNG
-	IF (@matkhau = '')
-		BEGIN
-			SET @error = N'Mật khẩu không được để trống'
-			RAISERROR(N'Mật khẩu không được để trống', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
-	--KIỂM TRA LOẠI TÀI KHOẢN CÓ ĐÚNG CẤU TRÚC KHÔNG
-	
-	DECLARE @kiemtraLTK INT
-	EXEC @kiemtraLTK = KIEMTRA_LOAITAIKHOAN @loaitaikhoan
-	IF (@kiemtraLTK = 1)
-		BEGIN
-			SET @error = N'Loại tài khoản này không hợp lệ'
-			RAISERROR (N'Loại tài khoản này không hợp lệ', 0, 0)
-			ROLLBACK TRAN
-			RETURN
-		END
+	EXEC sp_TAOID @ID_TK OUTPUT
+
 	--GÁN ID QUẢN TRỊ VIÊN HIỆN TẠI THỰC HIỆN
-	DECLARE @id_qtv VARCHAR(5)
+	DECLARE @id_qtv VARCHAR(255)
 	SET @id_qtv = CURRENT_USER
-	INSERT INTO TAI_KHOAN(
-							ID_TAIKHOAN,
-							HOTEN,
-							SDT,
-							NGAYSINH,
-							EMAIL,
-							MATKHAU,
-							LOAITK,
-							ID_QTV)
-	VALUES					(@ID_TK,
-							@tentaikhoan,
-							@sdt,
-							@ngaysinh,
-							@email,
-							@matkhau,
-							@loaitaikhoan,
-							@id_qtv)
+	print @id_qtv
+	INSERT INTO V_THEM_XOA_SUA_TKNHASI_NHANVIEN(
+												ID_TAIKHOAN,
+												HOTEN,
+												SDT,
+												NGAYSINH,
+												EMAIL,
+												MATKHAU,
+												LOAITK,
+												ID_QTV)
+
+VALUES											(@ID_TK,
+												@tentaikhoan,
+												@sdt,
+												@ngaysinh,
+												@email,
+												@matkhau,
+												@loaitaikhoan,
+												@id_qtv)
 			
 	IF (@@ERROR <> 0)
+		BEGIN
+			SET @error = N'Không thể thêm. Vui lòng thử lại'
+			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+
+COMMIT TRAN
+DECLARE @cmd varchar(200), @username varchar(50)
+IF NOT EXISTS 
+    (SELECT name  
+     FROM master.sys.server_principals
+     WHERE name = @sdt)
 	BEGIN
-		SET @error = N'Không thể thêm. Vui lòng thử lại'
-		RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
-		ROLLBACK TRAN
-		RETURN
+		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
 	END
+----------------------------------------------
+set @cmd = ' 
+   USE QL_NHAKHOA
+   CREATE USER [' + @ID_TK + ']' + ' FOR LOGIN '+ '[' + @sdt +']'
+PRINT @cmd
+EXEC (@cmd)
+IF (@loaitaikhoan = 'KH')
+	BEGIN
+		exec sp_addrolemember 'KHACHHANG', @ID_TK
+	END
+ELSE IF (@loaitaikhoan = 'NS')
+	BEGIN
+		exec sp_addrolemember 'NHA_SI', @ID_TK
+	END
+ELSE IF (@loaitaikhoan = 'NV')
+	BEGIN
+		exec sp_addrolemember 'NHAN_VIEN', @ID_TK
+	END
+GO
+
+--=========================XÓA TÀI KHOẢN=======================================
+
+CREATE OR ALTER PROC sp_XOA_TAIKHOAN
+	@idtaikhoan VARCHAR(255),
+	@error nvarchar(500) OUT
+AS
+	IF EXISTS(SELECT* FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+		BEGIN
+			-- Xóa login
+			DECLARE @sdt CHAR(11)
+			SET @sdt = (SELECT SDT FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+			exec sp_droplogin @sdt
+
+
+			-- Xóa tài khoản
+			EXEC sp_revokedbaccess @idtaikhoan
+
+			DELETE FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN
+			WHERE ID_TAIKHOAN = @idtaikhoan
+			
+			RETURN
+
+		END
+	ELSE
+		BEGIN
+			SET @error = N'Không tồn tại tài khoản này'
+			PRINT @error
+			RETURN
+		END
+GO
+
+--=========================CẬP NHẬT TÀI KHOẢN=======================================
+
+CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
+	@idtaikhoan VARCHAR(255),
+	@tentaikhoan NVARCHAR(30) = NULL,
+	@ngaysinh DATE = NULL,
+	@email VARCHAR(30) = NULL,
+	@loaitaikhoan varchar(20) = NULL,
+	@error nvarchar(500) OUT
+AS
+
+BEGIN TRAN
+	DECLARE @OLDloaitaikhoan varchar(20)
+	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+	IF (@OLDloaitaikhoan = '')
+		BEGIN
+			SET @error = N'Không tồn tại id tài khoản. Vui lòng thử lại'
+			RAISERROR (N'Không tồn tại id tài khoản. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+
+	IF (LEN(ISNULL(@tentaikhoan, '')) = 0)
+		BEGIN
+			SET @tentaikhoan = (SELECT HOTEN FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+
+
+	IF (LEN(ISNULL(@ngaysinh, '')) = 0)
+		BEGIN
+			SET @ngaysinh = (SELECT NGAYSINH FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+
+
+	IF (LEN(ISNULL(@email, '')) = 0)
+		BEGIN
+			SET @email = (SELECT EMAIL FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+
+
+	IF (LEN(ISNULL(@loaitaikhoan, '')) = 0)
+		BEGIN
+			SET @loaitaikhoan = (SELECT LOAITK FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+	ELSE IF (@loaitaikhoan = 'QTV')
+		BEGIN
+			SET @error = N'Không thể phân thành quản trị viên. Vui lòng thử lại'
+			RAISERROR (N'Không thể phân thành quản trị viên. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+
+
+	UPDATE V_THEM_XOA_SUA_TKNHASI_NHANVIEN
+	SET HOTEN = @tentaikhoan,
+		NGAYSINH = @ngaysinh,
+		EMAIL = @email,
+		LOAITK = @loaitaikhoan,
+		ID_QTV = CURRENT_USER
+	WHERE ID_TAIKHOAN = @idtaikhoan
+			
+	IF (@@ERROR <> 0)
+		BEGIN
+			SET @error = N'Không thể cập nhật. Vui lòng thử lại'
+			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+COMMIT TRAN
+
+--XÓA ROLE CŨ CỦA TÀI KHOẢN
+IF (@OLDloaitaikhoan = 'KH')
+	BEGIN
+		EXEC sp_droprolemember 'KHACHHANG', @idtaikhoan
+	END
+ELSE IF (@OLDloaitaikhoan = 'NV')
+	BEGIN
+		EXEC sp_droprolemember 'NHAN_VIEN', @idtaikhoan
+	END
+ELSE 
+	BEGIN
+		EXEC sp_droprolemember 'NHA_SI', @idtaikhoan
+	END
+
+--CẬP NHẬT ROLE MỚI CHO TÀI KHOẢN
+IF (@loaitaikhoan = 'KH')
+	BEGIN
+		EXEC sp_addrolemember 'KHACHHANG', @idtaikhoan
+	END
+ELSE IF (@OLDloaitaikhoan = 'NV')
+	BEGIN
+		EXEC sp_addrolemember 'NHAN_VIEN', @idtaikhoan
+	END
+ELSE 
+	BEGIN
+		EXEC sp_addrolemember 'NHA_SI', @idtaikhoan
+	END
+
+GO
+
+--=========================XEM THÔNG TIN 1 TÀI KHOẢN=======================================
+CREATE OR ALTER PROC sp_XEM_1TAIKHOAN_NGUOIDUNG
+	@idtaikhoan VARCHAR(255)
+AS
+	SELECT *
+	FROM V_XEM_TTTK
+	WHERE ID_TAIKHOAN = @idtaikhoan
+GO
+
+--=========================XEM THÔNG TIN CÁC TÀI KHOẢN=======================================
+CREATE OR ALTER PROC sp_XEM_NHIEU_TAIKHOAN
+AS
+	SELECT *
+	FROM V_XEM_TTTK
+GO
+
+--=========================KHÓA TÀI KHOẢN=======================================
+CREATE OR ALTER PROC sp_KHOA_TAIKHOAN_NGUOIDUNG
+	@idtaikhoan VARCHAR(255)
+AS
+	exec sp_revokedbaccess @idtaikhoan
+GO
+
+--=========================XEM THÔNG TIN 1 LOẠI THUỐC=======================================
+CREATE OR ALTER PROC sp_XEM_1TT_THUOC
+	@idthuoc VARCHAR(255)
+AS
+	SELECT TTTHUOC.*, SL.SOLUONG AS N'Số lượng thuốc tồn kho'
+	FROM V_XEM_THEM_SUA_XOA_TTTHUOC TTTHUOC, V_XEM_THEM_SUA_XOA_SOLUONGTONKHO SL
+	WHERE TTTHUOC.ID_THUOC = @idthuoc
+		AND SL.ID_THUOC = TTTHUOC.ID_THUOC
+GO
+
+--=========================XEM THÔNG TIN DANH SÁCH THUỐC=======================================
+CREATE OR ALTER PROC sp_XEM_NHIEU_THUOC
+AS
+	SELECT TTTHUOC.*, SL.SOLUONG AS N'Số lượng thuốc tồn kho'
+	FROM V_XEM_THEM_SUA_XOA_TTTHUOC TTTHUOC, V_XEM_THEM_SUA_XOA_SOLUONGTONKHO SL
+GO
+
+--=========================XEM THÔNG TIN 1 LOẠI THUỐC SỬ DỤNG=======================================
+CREATE OR ALTER PROC sp_XEM_1TT_THUOC_SD
+	@idthuoc VARCHAR(255)
+AS
+	SELECT *
+	FROM V_XEM_THEM_SUA_XOA_THUOCSD
+	WHERE ID_THUOC = @idthuoc
+GO
+
+--=========================XEM THÔNG TIN DANH SÁCH THUỐC SỬ DỤNG=======================================
+CREATE OR ALTER PROC sp_XEM_NHIEU_THUOC_SD
+AS
+	SELECT *
+	FROM V_XEM_THEM_SUA_XOA_THUOCSD
+GO
+
+--========================================================================================================
+
+
+--=========================THÊM THÔNG TIN THUỐC=======================================
+CREATE OR ALTER PROC sp_THEM_TT_THUOC
+	@tenthuoc NVARCHAR(30),
+	@chidinh NVARCHAR(100),
+	@ngayhethan DATE,
+	@giatien MONEY,
+	@soluong int,
+	@error nvarchar(500) OUT
+AS
+BEGIN TRAN
+	--TẠO ID TÀI KHOẢN MỚI
+	DECLARE @ID_THUOC VARCHAR(255)
+	EXEC sp_TAOID @ID_THUOC OUTPUT
+
+	--GÁN ID QUẢN TRỊ VIÊN HIỆN TẠI THỰC HIỆN
+
+	DECLARE @id_qtv VARCHAR(255)
+	SET @id_qtv = CURRENT_USER
+
+	INSERT INTO V_XEM_THEM_SUA_XOA_TTTHUOC(
+											ID_THUOC,
+											TENTHUOC,
+											CHIDINH,
+											NGAYHETHAN,
+											GIATIEN,
+											ID_QTV)
+
+	VALUES									(@ID_THUOC,
+											@tenthuoc,
+											@chidinh,
+											@ngayhethan,
+											@giatien,
+											@id_qtv)
+
+	INSERT INTO V_XEM_THEM_SUA_XOA_SOLUONGTONKHO(
+													ID_THUOC,
+													SOLUONG
+												)
+	VALUES										(
+													@ID_THUOC,
+													@soluong
+												)
+			
+	IF (@@ERROR <> 0)
+		BEGIN
+			SET @error = N'Không thể thêm. Vui lòng thử lại'
+			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
 	
 COMMIT TRAN
+GO
+
+--=========================CẬP NHẬT THÔNG TIN THUỐC=======================================
+
+CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
+	@ID_THUOC VARCHAR(255),
+	@tenthuoc NVARCHAR(30) = NULL,
+	@chidinh NVARCHAR(100) = NULL,
+	@ngayhethan DATE = NULL,
+	@giatien MONEY = NULL,
+	@soluong int = NULL,
+	@error nvarchar(500) OUT
+AS
+BEGIN TRAN
+	IF (LEN(ISNULL(@tenthuoc, '')) = 0)
+		BEGIN
+			SET @tenthuoc = (SELECT TENTHUOC FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@chidinh, '')) = 0)
+		BEGIN
+			SET @chidinh = (SELECT CHIDINH FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@ngayhethan, '')) = 0)
+		BEGIN
+			SET @ngayhethan = (SELECT NGAYHETHAN FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@giatien, '')) = 0)
+		BEGIN
+			SET @giatien = (SELECT GIATIEN FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@soluong, '')) = 0)
+		BEGIN
+			SET @soluong = (SELECT SOLUONG FROM SO_LUONG_TON_KHO WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	DECLARE @id_qtv VARCHAR(255)
+	SET @id_qtv = CURRENT_USER
+
+
+	UPDATE V_XEM_THEM_SUA_XOA_TTTHUOC
+	SET TENTHUOC = @tenthuoc,
+		CHIDINH = @chidinh,
+		NGAYHETHAN = @ngayhethan,
+		GIATIEN = @giatien,
+		ID_QTV = @id_qtv
+	WHERE ID_THUOC = @ID_THUOC
+
+	--waitfor delay '00:00:10'
+
+	UPDATE V_XEM_THEM_SUA_XOA_SOLUONGTONKHO
+	SET ID_THUOC = @ID_THUOC,
+		SOLUONG = @soluong
+	WHERE ID_THUOC = @ID_THUOC
+			
+	IF (@@ERROR <> 0)
+		BEGIN
+			SET @error = N'Không thể cập nhật. Vui lòng thử lại'
+			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+	
+COMMIT TRAN
+GO
+
+
+--=========================XÓA THÔNG TIN THUỐC=======================================
+
+CREATE OR ALTER PROC sp_XOA_TT_THUOC
+	@ID_THUOC VARCHAR(255),
+	@error nvarchar(500) OUT
+AS
+BEGIN TRAN
+
+	DECLARE @id_qtv VARCHAR(255)
+	SET @id_qtv = CURRENT_USER
+
+	DELETE FROM V_XEM_THEM_SUA_XOA_THUOCSD
+	WHERE ID_THUOC = @ID_THUOC
+
+	DELETE FROM V_XEM_THEM_SUA_XOA_SOLUONGTONKHO
+	WHERE ID_THUOC = @ID_THUOC
+
+	DELETE FROM V_XEM_THEM_SUA_XOA_TTTHUOC
+	WHERE ID_THUOC = @ID_THUOC
+		
+	IF (@@ERROR <> 0)
+		BEGIN
+			SET @error = N'Không thể xóa. Vui lòng thử lại'
+			RAISERROR (N'Không thể xóa. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+	
+COMMIT TRAN
+GO
+
+
+--=========================PHÂN QUYỀN PROC TÀI KHOẢN=======================================
+
+GRANT EXECUTE ON OBJECT::sp_THEM_TAIKHOAN_NGUOIDUNG
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XOA_TAIKHOAN
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XEM_1TAIKHOAN_NGUOIDUNG
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XEM_NHIEU_TAIKHOAN
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_KHOA_TAIKHOAN_NGUOIDUNG
+    TO QUAN_TRI_VIEN;  
+GO
+
+
+--=========================PHÂN QUYỀN PROC THUỐC=======================================
+
+GRANT EXECUTE ON OBJECT::sp_XEM_1TT_THUOC
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XEM_NHIEU_THUOC
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XEM_1TT_THUOC_SD
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XEM_NHIEU_THUOC_SD
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_THEM_TT_THUOC
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_CAPNHAT_TT_THUOC
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_XOA_TT_THUOC
+    TO QUAN_TRI_VIEN;  
 GO
