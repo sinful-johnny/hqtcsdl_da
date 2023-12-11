@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp2
 {
-    partial class Form1
+    partial class KH_TrangChu
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.benh_an = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
+            this.Register = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -82,14 +83,14 @@
             this.ttcanhan.HideSelection = false;
             this.ttcanhan.Location = new System.Drawing.Point(12, 121);
             this.ttcanhan.Name = "ttcanhan";
-            this.ttcanhan.Size = new System.Drawing.Size(776, 51);
+            this.ttcanhan.Size = new System.Drawing.Size(776, 71);
             this.ttcanhan.TabIndex = 6;
             this.ttcanhan.UseCompatibleStateImageBehavior = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 179);
+            this.label2.Location = new System.Drawing.Point(12, 207);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 16);
             this.label2.TabIndex = 7;
@@ -98,16 +99,16 @@
             // benh_an
             // 
             this.benh_an.HideSelection = false;
-            this.benh_an.Location = new System.Drawing.Point(12, 198);
+            this.benh_an.Location = new System.Drawing.Point(12, 226);
             this.benh_an.Name = "benh_an";
-            this.benh_an.Size = new System.Drawing.Size(776, 81);
+            this.benh_an.Size = new System.Drawing.Size(776, 197);
             this.benh_an.TabIndex = 8;
             this.benh_an.UseCompatibleStateImageBehavior = false;
             this.benh_an.SelectedIndexChanged += new System.EventHandler(this.benh_an_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(349, 31);
+            this.button2.Location = new System.Drawing.Point(481, 33);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 54);
             this.button2.TabIndex = 9;
@@ -115,11 +116,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form1
+            // Register
+            // 
+            this.Register.Location = new System.Drawing.Point(341, 31);
+            this.Register.Name = "Register";
+            this.Register.Size = new System.Drawing.Size(110, 52);
+            this.Register.TabIndex = 10;
+            this.Register.Text = "Register";
+            this.Register.UseVisualStyleBackColor = true;
+            this.Register.Click += new System.EventHandler(this.Register_Click);
+            // 
+            // KH_TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 435);
+            this.Controls.Add(this.Register);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.benh_an);
             this.Controls.Add(this.label2);
@@ -128,8 +140,8 @@
             this.Controls.Add(this.password);
             this.Controls.Add(this.username);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "SQL Database demo";
+            this.Name = "KH_TrangChu";
+            this.Text = "Trang chủ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -145,6 +157,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView benh_an;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Register;
     }
 }
 

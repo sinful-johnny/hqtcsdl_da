@@ -11,9 +11,9 @@ using WindowsFormsApp2.Models;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form2 : Form
+    public partial class KH_XemChiTietBA : Form
     {
-        Form1 prev_form;
+        KH_TrangChu prev_form;
         public string ID_BA { get; set; }
 
         DatabaseAccess db;    
@@ -22,7 +22,7 @@ namespace WindowsFormsApp2
 
         List<DICHVU_SD> dICHVU_SDs = new List<DICHVU_SD>();
 
-        public Form2(string id_ba, Form1 prev_form, string username, string password)
+        public KH_XemChiTietBA(string id_ba, KH_TrangChu prev_form, string username, string password)
         {
             InitializeComponent();
             ID_BA = id_ba;

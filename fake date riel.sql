@@ -69,19 +69,19 @@ INSERT INTO SO_LUONG_TON_KHO VALUES
 ((select ID_THUOC from THUOC where TENTHUOC = 'Omeprazole'			), 120),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Aspirin'				), 90),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Simvastatin'			), 110),
-((select ID_THUOC from THUOC where TENTHUOC = 'Losartan'			)	, 160),
+((select ID_THUOC from THUOC where TENTHUOC = 'Losartan'			), 160),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Metformin'			), 130),
-((select ID_THUOC from THUOC where TENTHUOC = 'Warfarin'			)	, 75),
+((select ID_THUOC from THUOC where TENTHUOC = 'Warfarin'			), 75),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Lisinopril'			), 105),
-((select ID_THUOC from THUOC where TENTHUOC = 'Atorvastatin'		)	, 140),
+((select ID_THUOC from THUOC where TENTHUOC = 'Atorvastatin'		), 140),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Gabapentin'			), 180),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Amlodipine'			), 95),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Metoprolol'			), 200),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Hydrochlorothiazide'	), 120),
 ((select ID_THUOC from THUOC where TENTHUOC = 'Prednisone'			), 150),
-((select ID_THUOC from THUOC where TENTHUOC = 'Diazepam'			)	, 100),
-((select ID_THUOC from THUOC where TENTHUOC = 'Tramadol'			)	, 170),
-((select ID_THUOC from THUOC where TENTHUOC = 'Morphine'			)	, 110);
+((select ID_THUOC from THUOC where TENTHUOC = 'Diazepam'			), 100),
+((select ID_THUOC from THUOC where TENTHUOC = 'Tramadol'			), 170),
+((select ID_THUOC from THUOC where TENTHUOC = 'Morphine'			), 110);
 go
 
 insert BENH_AN(ID_BA,ID_KH,ID_NS,NGAYKHAM)

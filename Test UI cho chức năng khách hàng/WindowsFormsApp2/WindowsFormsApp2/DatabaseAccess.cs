@@ -7,6 +7,7 @@ using WindowsFormsApp2.Properties;
 using Dapper;
 using System.Data;
 using WindowsFormsApp2.Models;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
@@ -14,6 +15,7 @@ namespace WindowsFormsApp2
     {
         public string USERID { get; set; }
         public string PASSWORD { get; set; }
+
         
         public DatabaseAccess(string username, string password)
         {
@@ -86,6 +88,24 @@ namespace WindowsFormsApp2
             {
                 var output = connection.Query<LOAI_DV>($"sp_KH_XemChiTietDV '" + ID_LOAIDV + "'").ToList();
                 return output;
+            }
+        }
+        public void register(TAI_KHOAN tk)
+        {
+            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
+            {
+                var output = connection.Query($"sp_DangKyTaiKhoan N'" + tk.HOTEN + "' ,'" + tk.SDT + "' ,'" + tk.NGAYSINH.ToShortDateString() + "' ,'" + tk.EMAIL + "' ,'" + tk.MATKHAU + "'");
+                return;
+            }
+        }
+        public void SuaTTCaNhan(string HOTEN, DateTime NGAYSINH, string EMAIL)
+        {
+            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
+            {
+                var output = connection.Query($"sp_KH_SuaTTCaNhan N'" + HOTEN+ "' ,'" + NGAYSINH.ToShortDateString() + "' ,'" + EMAIL  + "'");
+                return;
             }
         }
     }

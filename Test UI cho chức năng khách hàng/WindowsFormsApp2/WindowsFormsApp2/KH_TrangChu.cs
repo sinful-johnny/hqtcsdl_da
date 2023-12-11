@@ -11,12 +11,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form1 : Form
+    public partial class KH_TrangChu : Form
     {
         DatabaseAccess db;
         List<TAI_KHOAN> data = new List<TAI_KHOAN>();
         List<BENH_AN> dsBenhAn = new List<BENH_AN>();
-        public Form1()
+        string username_static;
+        string password_static;
+        public KH_TrangChu()
         {
             InitializeComponent();
 
@@ -35,6 +37,7 @@ namespace WindowsFormsApp2
             //newItem.SubItems.Add("sth2");
             //newItem.SubItems.Add("sth3");
             //ttcanhan.Items.Add(newItem);
+            ttcanhan.Items.Clear();
             foreach(TAI_KHOAN tAI_KHOAN in data)
             {
                 ListViewItem newItem = new ListViewItem(tAI_KHOAN.ID_TAIKHOAN);
@@ -69,6 +72,8 @@ namespace WindowsFormsApp2
         {
 
             //data = db.GetTAI_KHOANs();
+            username_static = username.Text;
+            password_static = password.Text;
             db = new DatabaseAccess(username.Text, password.Text);
             data = db.loginDB();
             dsBenhAn = db.getBENH_ANs();
@@ -143,14 +148,21 @@ namespace WindowsFormsApp2
             //benh_an.SelectedItems[0].Text
             if(benh_an.SelectedItems.Count > 0)
             {
-                Form2 form2 = new Form2(benh_an.SelectedItems[0].Text, this, username.Text, password.Text);
-                form2.Show();
+                KH_XemChiTietBA KH_XemChiTietBA_form = new KH_XemChiTietBA(benh_an.SelectedItems[0].Text, this, username.Text, password.Text);
+                KH_XemChiTietBA_form.Show();
             }
+        }
+
+        private void Register_Click(object sender, EventArgs e)
+        {
+            KH_DangKi kH_DangKi_form = new KH_DangKi(this);
+            kH_DangKi_form.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            KH_SuaTTCaNhan kH_SuaTTCaNhan_form = new KH_SuaTTCaNhan(this, username_static,password_static); 
+            kH_SuaTTCaNhan_form.Show();
         }
     }
 }

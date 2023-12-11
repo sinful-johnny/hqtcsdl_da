@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp2
 {
-    partial class Form2
+    partial class KH_XemChiTietBA
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@
             this.dv_sd.UseCompatibleStateImageBehavior = false;
             this.dv_sd.SelectedIndexChanged += new System.EventHandler(this.dv_sd_SelectedIndexChanged);
             // 
-            // Form2
+            // KH_XemChiTietBA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -80,8 +80,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.don_thuoc);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "KH_XemChiTietBA";
+            this.Text = "Chi tiết bệnh án";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Shown += new System.EventHandler(this.Form2_Shown);

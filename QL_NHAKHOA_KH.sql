@@ -240,6 +240,7 @@ as
 	begin tran
 		select *
 		from V_KH_TTCANHAN
+		where ID_TAIKHOAN = CURRENT_USER
 	commit tran
 go
 grant EXECUTE ON OBJECT::sp_KH_XemTTCaNhan 
@@ -264,4 +265,41 @@ grant EXECUTE ON OBJECT::sp_KH_XemDSDichVu
     TO KHACHHANG;  
 GO
 
+use master
+exec sp_addlogin 'CHUNG', '', 'QL_NHAKHOA'
+go
+GRANT ALTER ANY LOGIN TO CHUNG
+go
+USE QL_NHAKHOA CREATE USER [CHUNG] FOR LOGIN [CHUNG]
+go
+--exec sp_addrolemember 'db_accessadmin', 'CHUNG'
+--go
+GRANT SELECT,INSERT,UPDATE,DELETE ON TAI_KHOAN TO CHUNG
+go
+GRANT ALTER ANY USER TO CHUNG
+GRANT ALTER ON role::[KHACHHANG] TO [CHUNG]
+go
+create proc sp_DangKyTaiKhoan 
+	@hoten nvarchar(30),
+	@sdt varchar(11),
+	@ngaysinh date,
+	@email varchar(30),
+	@matkhau varchar(30)
+as
+		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
+		declare @idtk varchar(255)
+		select @idtk = cast(NEWID() as varchar(255))
+		insert V_KH_TTCANHAN(ID_TAIKHOAN,HOTEN,SDT,NGAYSINH,EMAIL,MATKHAU,LOAITK) values (@idtk,@hoten,@sdt,@ngaysinh,@email,@matkhau,'KH')
+		--create user [@idtk] for login [@sdt]
+		declare @cmd varchar(200), @username varchar(50)
 
+		set @cmd = ' 
+		   USE QL_NHAKHOA
+		   CREATE USER [' + @idtk + '] FOR LOGIN '+ '[' + @sdt + ']'
+		PRINT @cmd
+		EXEC (@cmd)
+		exec sp_addrolemember 'KHACHHANG', @idtk
+go
+grant EXECUTE ON OBJECT::sp_DangKyTaiKhoan 
+    TO CHUNG;  
+GO
