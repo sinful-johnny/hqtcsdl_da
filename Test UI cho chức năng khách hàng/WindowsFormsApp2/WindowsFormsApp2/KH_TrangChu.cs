@@ -84,18 +84,6 @@ namespace WindowsFormsApp2
             //Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
             //MessageBox.Show(helper.connectionString);
         }
-        int count1 = 0;
-        //private void dsKH_SelectedIndexChanged_1(object sender, EventArgs e)
-        //{
-        //    if(count1 == 0)
-        //    {
-        //        count1 = 1;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show(dsKH.Text.Split('\t')[0]);
-        //    }
-        //}
         private void Username_Leave(object sender, EventArgs e)
         {
             if(username.Text == "")

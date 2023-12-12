@@ -25,7 +25,27 @@ C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng kh
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+<<<<<<< Updated upstream
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_TrangChu.resources
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_XemChiTietBA.resources
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_DangKi.resources
 C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_SuaTTCaNhan.resources
+=======
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form2.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form3.resources
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.dll
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Dapper.xml
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form2.resources
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form3.resources
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+>>>>>>> Stashed changes

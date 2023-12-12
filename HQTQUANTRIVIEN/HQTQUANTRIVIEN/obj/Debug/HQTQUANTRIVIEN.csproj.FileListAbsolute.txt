@@ -1,0 +1,12 @@
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\bin\Debug\HQTQUANTRIVIEN.exe.config
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\bin\Debug\HQTQUANTRIVIEN.exe
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\bin\Debug\HQTQUANTRIVIEN.pdb
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.csproj.AssemblyReference.cache
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.Properties.Resources.resources
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.csproj.GenerateResource.cache
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.csproj.CoreCompileInputs.cache
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.exe
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.pdb
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\bin\Debug\Dapper.dll
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\bin\Debug\Dapper.xml
+E:\Github\hqtcsdl_da\HQTQUANTRIVIEN\HQTQUANTRIVIEN\obj\Debug\HQTQUANTRIVIEN.csproj.CopyComplete

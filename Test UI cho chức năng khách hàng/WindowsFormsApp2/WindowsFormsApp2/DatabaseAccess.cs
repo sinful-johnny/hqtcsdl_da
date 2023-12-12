@@ -24,7 +24,7 @@ namespace WindowsFormsApp2
         }
         public List<TAI_KHOAN> GetTAI_KHOANs()
         {
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
+            Helper helper = new Helper("KYLES-LAPTOP", "QL_NHAKHOA", "sa", "123");
             //using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MyDB")))
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
             {
@@ -34,7 +34,7 @@ namespace WindowsFormsApp2
         }
         public List<TAI_KHOAN> loginDB()
         {
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            Helper helper = new Helper("KYLES-LAPTOP", "QL_NHAKHOA", USERID, PASSWORD);
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
             {
                 var output = connection.Query<TAI_KHOAN>($"exec sp_KH_XemTTCaNhan").ToList();
@@ -43,7 +43,7 @@ namespace WindowsFormsApp2
         }
         public List<BENH_AN> getBENH_ANs()
         {
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            Helper helper = new Helper("KYLES-LAPTOP", "QL_NHAKHOA", USERID, PASSWORD);
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
             {
                 var output = connection.Query<BENH_AN>($"exec sp_KH_XemBenhAn").ToList();
@@ -64,7 +64,7 @@ namespace WindowsFormsApp2
         public List<DICHVU_SD> GetDICHVU_SDs(string ID_BA)
         {
 
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            Helper helper = new Helper("KYLES-LAPTOP", "QL_NHAKHOA", USERID, PASSWORD);
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
             {
                 var output = connection.Query<DICHVU_SD>($"exec sp_KH_XemDVSD '"+ ID_BA + "'").ToList();
@@ -83,7 +83,7 @@ namespace WindowsFormsApp2
         //}
         public List<LOAI_DV> GetLOAI_DVs(string ID_LOAIDV)
         {
-            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            Helper helper = new Helper("KYLES-LAPTOP", "QL_NHAKHOA", USERID, PASSWORD);
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
             {
                 var output = connection.Query<LOAI_DV>($"sp_KH_XemChiTietDV '" + ID_LOAIDV + "'").ToList();
