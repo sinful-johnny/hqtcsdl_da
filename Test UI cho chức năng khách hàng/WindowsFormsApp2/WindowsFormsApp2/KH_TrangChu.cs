@@ -51,6 +51,7 @@ namespace WindowsFormsApp2
         }
         private void UpdateBenhAn()
         {
+            benh_an.Items.Clear(); 
             foreach (BENH_AN benhAn in dsBenhAn)
             {
                 ListViewItem newItem = new ListViewItem(benhAn.ID_BA);

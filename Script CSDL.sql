@@ -213,6 +213,7 @@ as
 								and I.ID_LLV = LDK.ID_LLV
 								and LLV.ID_LLV = LDK.ID_LLV
 								and LLV.TRANGTHAI = N'Trống'
+								and datediff(day,LLV.NGAYKHAM,getdate()) <= 0
 					)
 	begin
 		;throw 50000, N'Lịch làm việc đã đặt không hợp lệ',1

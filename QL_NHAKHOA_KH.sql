@@ -104,6 +104,7 @@ create proc sp_KH_XemLichKham
 as
 	select *
 	from V_KH_LICHDATKHAM
+	where ID_KH = CURRENT_USER
 go
 grant EXECUTE ON OBJECT::sp_KH_XemLichKham
     TO KHACHHANG;  
@@ -177,16 +178,6 @@ create proc sp_KH_ThemLichDatKham
 	@id_llv varchar(255)
 as
 	begin tran
-		if	exists	(
-						select *
-						from V_KH_LICHNHASI as LNS
-						where LNS.ID_LLV = @id_llv
-								and LNS.TRANGTHAI != N'Trống'
-					)
-		begin
-			;throw 50000, 'Lịch làm việc đã được đặt', 1
-			rollback tran
-		end
 
 		insert V_KH_LICHDATKHAM(ID_KH,ID_LLV)
 		values (CURRENT_USER, @id_llv)
@@ -301,5 +292,6 @@ as
 		exec sp_addrolemember 'KHACHHANG', @idtk
 go
 grant EXECUTE ON OBJECT::sp_DangKyTaiKhoan 
-    TO CHUNG;  
+    TO CHUNG;
 GO
+
