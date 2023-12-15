@@ -18,7 +18,7 @@ namespace WindowsFormsApp2
 
         DatabaseAccess db;    
 
-        List<DON_THUOC> dON_THUOCs = new List<DON_THUOC>();
+        List<THUOC_SD> THUOC_SDs = new List<THUOC_SD>();
 
         List<DICHVU_SD> dICHVU_SDs = new List<DICHVU_SD>();
 
@@ -33,9 +33,8 @@ namespace WindowsFormsApp2
         private void Form2_Load(object sender, EventArgs e)
         {
             don_thuoc.View = View.Details;
-            don_thuoc.Columns.Add("ID DON THUOC", 100);
-            don_thuoc.Columns.Add("THANH TIEN", 100);
-            don_thuoc.Columns.Add("HOA DON", 100);
+            don_thuoc.Columns.Add("ID THUOC", 100);
+            don_thuoc.Columns.Add("SO LUONG", 100);
 
             dv_sd.View = View.Details;
             dv_sd.Columns.Add("ID DICH VU", 100);
@@ -44,7 +43,8 @@ namespace WindowsFormsApp2
 
             //dON_THUOCs = db.GetDON_THUOCs(ID_BA);
             dICHVU_SDs = db.GetDICHVU_SDs(ID_BA);  
-            update_ListView_HOADON();
+            THUOC_SDs = db.GetTHUOC_SDs(ID_BA);
+            update_ListView_THUOCSD();
             update_ListView_DVSD();
         }
         public void setControlState(Control Ctl, bool enabled)
@@ -65,18 +65,19 @@ namespace WindowsFormsApp2
             this.Hide();
         }
 
-        private void update_ListView_HOADON()
+        private void update_ListView_THUOCSD()
         {
-            foreach(DON_THUOC dON_THUOC in dON_THUOCs)
+            don_thuoc.Items.Clear();
+            foreach(THUOC_SD thuoc in THUOC_SDs)
             {
-                ListViewItem newItem = new ListViewItem(dON_THUOC.ID_DONTHUOC);
-                newItem.SubItems.Add(dON_THUOC.THANHTIEN.ToString());
-                newItem.SubItems.Add(dON_THUOC.ID_HOADON);
+                ListViewItem newItem = new ListViewItem(thuoc.ID_THUOC);
+                newItem.SubItems.Add(thuoc.SOLUONG.ToString());
                 don_thuoc.Items.Add(newItem);
             }
         }
         private void update_ListView_DVSD()
         {
+            dv_sd.Items.Clear();
             foreach (DICHVU_SD dICHVU_SD in dICHVU_SDs)
             {
                 ListViewItem newItem = new ListViewItem(dICHVU_SD.ID_LOAIDV);

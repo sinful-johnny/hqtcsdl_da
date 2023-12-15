@@ -22,10 +22,10 @@ as
 	from LICH_LAM_VIEC
 go
 
-create or alter view V_TTNHASI
+create or alter view V_KH_TTNHASI
 as
 	select HOTEN, SDT, EMAIL, ID_TAIKHOAN
-	from TAI_KHOAN,BENH_AN
+	from TAI_KHOAN
 	where LOAITK = 'NS'
 go
 
@@ -100,11 +100,12 @@ as
 		exec sp_addrolemember 'KHACHHANG', @idtk
 go
 
-create proc sp_KH_XemLichKham 
+alter proc sp_KH_XemLichKham 
 as
-	select *
-	from V_KH_LICHDATKHAM
-	where ID_KH = CURRENT_USER
+	select LNS.*
+	from V_KH_LICHNHASI as LNS
+			inner join V_KH_LICHDATKHAM as LDK on LNS.ID_LLV = LDK.ID_LLV
+	where LDK.ID_KH = CURRENT_USER
 go
 grant EXECUTE ON OBJECT::sp_KH_XemLichKham
     TO KHACHHANG;  
@@ -114,6 +115,7 @@ create proc sp_KH_XemLichNS
 as
 	select *
 	from V_KH_LICHNHASI
+	where TRANGTHAI = N'Trống'
 go
 grant EXECUTE ON OBJECT::sp_KH_XemLichNS
     TO KHACHHANG;  
@@ -173,11 +175,19 @@ grant EXECUTE ON OBJECT::sp_KH_XemChiTietThuoc
     TO KHACHHANG;  
 GO
 
-
-create proc sp_KH_ThemLichDatKham
-	@id_llv varchar(255)
+alter proc sp_KH_ThemLichDatKham
+	@id_ns varchar(255),
+	@ngaykham datetime,
+	@giokham time(7)
 as
 	begin tran
+		declare @id_llv varchar(255)
+
+		select @id_llv = ID_LLV
+		from LICH_LAM_VIEC
+		where	ID_NS = @id_ns
+				and NGAYKHAM = @ngaykham
+				and GIOKHAM = @giokham
 
 		insert V_KH_LICHDATKHAM(ID_KH,ID_LLV)
 		values (CURRENT_USER, @id_llv)
@@ -187,7 +197,6 @@ go
 grant EXECUTE ON OBJECT::sp_KH_ThemLichDatKham 
     TO KHACHHANG;  
 GO
-
 
 create proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
@@ -256,6 +265,27 @@ grant EXECUTE ON OBJECT::sp_KH_XemDSDichVu
     TO KHACHHANG;  
 GO
 
+create proc sp_KH_HoTenNSConSlot
+as
+	select TTNS.HOTEN as HOTEN, TTNS.ID_TAIKHOAN as ID_TAIKHOAN
+	from V_KH_TTNHASI as TTNS
+			inner join V_KH_LICHNHASI as LNS on TTNS.ID_TAIKHOAN = LNS.ID_NS
+go
+grant EXECUTE ON OBJECT::sp_KH_HoTenNSConSlot
+    TO KHACHHANG;
+GO
+
+create proc sp_KH_XemLLVcuaNS 
+	@idns varchar(255)
+as
+	select *
+	from V_KH_LICHNHASI
+	where ID_NS = @idns
+go
+grant EXECUTE ON OBJECT::sp_KH_XemLLVcuaNS 
+    TO KHACHHANG;
+GO
+
 use master
 exec sp_addlogin 'CHUNG', '', 'QL_NHAKHOA'
 go
@@ -294,4 +324,5 @@ go
 grant EXECUTE ON OBJECT::sp_DangKyTaiKhoan 
     TO CHUNG;
 GO
+
 
