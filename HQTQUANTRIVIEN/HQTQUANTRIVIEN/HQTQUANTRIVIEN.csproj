@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,19 +50,127 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QUẢN LÝ THUỐC\CapNhatThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\CapNhatThuoc.Designer.cs">
+      <DependentUpon>CapNhatThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\kiemtraListTHUOC_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\kiemtraListTHUOC_Form.Designer.cs">
+      <DependentUpon>kiemtraListTHUOC_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\CapNhatTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\CapNhatTaiKhoan.Designer.cs">
+      <DependentUpon>CapNhatTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\DangKy_TaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\DangKy_TaiKhoan.Designer.cs">
+      <DependentUpon>DangKy_TaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\KhoaTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\KhoaTaiKhoan.Designer.cs">
+      <DependentUpon>KhoaTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\kiemtraListTK_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\kiemtraListTK_Form.Designer.cs">
+      <DependentUpon>kiemtraListTK_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\kiemtraTK_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\kiemtraTK_Form.Designer.cs">
+      <DependentUpon>kiemtraTK_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\TAI_KHOAN.cs" />
     <Compile Include="Models\THUOC.cs" />
     <Compile Include="Models\THUOC_SD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanTriVienForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanTriVienForm.Designer.cs">
+      <DependentUpon>QuanTriVienForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\ThemTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\ThemTaiKhoan.Designer.cs">
+      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\tkCheckedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ TÀI KHOẢN\tkCheckedForm.Designer.cs">
+      <DependentUpon>tkCheckedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\ThemThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\ThemThuoc.Designer.cs">
+      <DependentUpon>ThemThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\thuocCheckedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\thuocCheckedForm.Designer.cs">
+      <DependentUpon>thuocCheckedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIHome.Designer.cs">
       <DependentUpon>UIHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\KiemTraTTThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\KiemTraTTThuoc.Designer.cs">
+      <DependentUpon>KiemTraTTThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\XoaThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUẢN LÝ THUỐC\XoaThuoc.Designer.cs">
+      <DependentUpon>XoaThuoc.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\CapNhatThuoc.resx">
+      <DependentUpon>CapNhatThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\kiemtraListTHUOC_Form.resx">
+      <DependentUpon>kiemtraListTHUOC_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\KiemTraTTThuoc.resx">
+      <DependentUpon>KiemTraTTThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\CapNhatTaiKhoan.resx">
+      <DependentUpon>CapNhatTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\DangKy_TaiKhoan.resx">
+      <DependentUpon>DangKy_TaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\KhoaTaiKhoan.resx">
+      <DependentUpon>KhoaTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\kiemtraListTK_Form.resx">
+      <DependentUpon>kiemtraListTK_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\kiemtraTK_Form.resx">
+      <DependentUpon>kiemtraTK_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -71,8 +180,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanTriVienForm.resx">
+      <DependentUpon>QuanTriVienForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\ThemTaiKhoan.resx">
+      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ TÀI KHOẢN\tkCheckedForm.resx">
+      <DependentUpon>tkCheckedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\ThemThuoc.resx">
+      <DependentUpon>ThemThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\thuocCheckedForm.resx">
+      <DependentUpon>thuocCheckedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIHome.resx">
       <DependentUpon>UIHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUẢN LÝ THUỐC\XoaThuoc.resx">
+      <DependentUpon>XoaThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -89,4 +216,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

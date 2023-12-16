@@ -21,8 +21,7 @@ CREATE OR ALTER PROC sp_THEM_TAIKHOAN_NGUOIDUNG
 	@ngaysinh DATE,
 	@email VARCHAR(30),
 	@matKhau varchar(100),
-	@loaitaikhoan varchar(20),
-	@error nvarchar(500) OUT
+	@loaitaikhoan varchar(20)
 AS
 BEGIN TRAN
 	--TẠO ID TÀI KHOẢN MỚI
@@ -54,7 +53,6 @@ VALUES											(@ID_TK,
 			
 	IF (@@ERROR <> 0)
 		BEGIN
-			SET @error = N'Không thể thêm. Vui lòng thử lại'
 			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -92,8 +90,7 @@ GO
 --=========================XÓA TÀI KHOẢN=======================================
 
 CREATE OR ALTER PROC sp_XOA_TAIKHOAN
-	@idtaikhoan VARCHAR(255),
-	@error nvarchar(500) OUT
+	@idtaikhoan VARCHAR(255)
 AS
 	IF EXISTS(SELECT* FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
 		BEGIN
@@ -106,7 +103,31 @@ AS
 			-- Xóa tài khoản
 			EXEC sp_revokedbaccess @idtaikhoan
 
-			DELETE FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN
+			if EXISTS(	SELECT*
+						FROM TAI_KHOAN TK
+						WHERE TK.ID_TAIKHOAN = @idtaikhoan
+							AND TK.LOAITK = 'NS')
+			BEGIN
+				DELETE FROM V_THEM_XOA_SUA_LICHDATKHAM
+				WHERE ID_LLV IN (SELECT LLV.ID_LLV FROM LICH_LAM_VIEC LLV WHERE LLV.ID_NS = @idtaikhoan)
+
+				DELETE FROM V_THEM_XOA_SUA_LICHLAMVIEC
+				WHERE ID_NS = @idtaikhoan
+			END
+
+			ELSE
+			BEGIN
+				UPDATE V_THEM_XOA_SUA_LICHDATKHAM
+				SET ID_NV = NULL
+				WHERE ID_NV = @idtaikhoan
+
+				UPDATE V_THEM_XOA_SUA_LICHDATKHAM
+				SET ID_NV = NULL
+				WHERE ID_NV = @idtaikhoan
+			END
+
+			--Xóa data của tài khoản
+			DELETE FROM V_THEM_XOA_SUA_TK
 			WHERE ID_TAIKHOAN = @idtaikhoan
 			
 			RETURN
@@ -114,8 +135,7 @@ AS
 		END
 	ELSE
 		BEGIN
-			SET @error = N'Không tồn tại tài khoản này'
-			PRINT @error
+			RAISERROR (N'Không tòn tại tài khoản để xóa. Vui lòng nhập tài khoản khác', 0, 0)
 			RETURN
 		END
 GO
@@ -127,8 +147,7 @@ CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 	@tentaikhoan NVARCHAR(30) = NULL,
 	@ngaysinh DATE = NULL,
 	@email VARCHAR(30) = NULL,
-	@loaitaikhoan varchar(20) = NULL,
-	@error nvarchar(500) OUT
+	@loaitaikhoan varchar(20) = NULL
 AS
 
 BEGIN TRAN
@@ -136,7 +155,6 @@ BEGIN TRAN
 	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
 	IF (@OLDloaitaikhoan = '')
 		BEGIN
-			SET @error = N'Không tồn tại id tài khoản. Vui lòng thử lại'
 			RAISERROR (N'Không tồn tại id tài khoản. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -166,7 +184,6 @@ BEGIN TRAN
 		END
 	ELSE IF (@loaitaikhoan = 'QTV')
 		BEGIN
-			SET @error = N'Không thể phân thành quản trị viên. Vui lòng thử lại'
 			RAISERROR (N'Không thể phân thành quản trị viên. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -183,7 +200,6 @@ BEGIN TRAN
 			
 	IF (@@ERROR <> 0)
 		BEGIN
-			SET @error = N'Không thể cập nhật. Vui lòng thử lại'
 			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -209,7 +225,7 @@ IF (@loaitaikhoan = 'KH')
 	BEGIN
 		EXEC sp_addrolemember 'KHACHHANG', @idtaikhoan
 	END
-ELSE IF (@OLDloaitaikhoan = 'NV')
+ELSE IF (@loaitaikhoan = 'NV')
 	BEGIN
 		EXEC sp_addrolemember 'NHAN_VIEN', @idtaikhoan
 	END
@@ -241,6 +257,28 @@ CREATE OR ALTER PROC sp_KHOA_TAIKHOAN_NGUOIDUNG
 	@idtaikhoan VARCHAR(255)
 AS
 	exec sp_revokedbaccess @idtaikhoan
+GO
+
+--=========================MỞ KHÓA TÀI KHOẢN=======================================
+CREATE OR ALTER PROC sp_MOKHOA_TAIKHOAN_NGUOIDUNG
+	@idtaikhoan VARCHAR(255)
+AS
+	DECLARE @loaitaikhoan NVARCHAR(20)
+	SET @loaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
+	IF (@loaitaikhoan = 'KH')
+	BEGIN
+		EXEC sp_addrolemember 'KHACHHANG', @idtaikhoan
+	END
+
+	ELSE IF (@loaitaikhoan = 'NV')
+	BEGIN
+		EXEC sp_addrolemember 'NHAN_VIEN', @idtaikhoan
+	END
+
+	ELSE 
+	BEGIN
+		EXEC sp_addrolemember 'NHA_SI', @idtaikhoan
+	END
 GO
 
 --=========================XEM THÔNG TIN 1 LOẠI THUỐC=======================================
@@ -285,8 +323,7 @@ CREATE OR ALTER PROC sp_THEM_TT_THUOC
 	@chidinh NVARCHAR(100),
 	@ngayhethan DATE,
 	@giatien MONEY,
-	@soluong int,
-	@error nvarchar(500) OUT
+	@soluong int
 AS
 BEGIN TRAN
 	--TẠO ID TÀI KHOẢN MỚI
@@ -324,7 +361,6 @@ BEGIN TRAN
 			
 	IF (@@ERROR <> 0)
 		BEGIN
-			SET @error = N'Không thể thêm. Vui lòng thử lại'
 			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -341,8 +377,7 @@ CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
 	@chidinh NVARCHAR(100) = NULL,
 	@ngayhethan DATE = NULL,
 	@giatien MONEY = NULL,
-	@soluong int = NULL,
-	@error nvarchar(500) OUT
+	@soluong int = NULL
 AS
 BEGIN TRAN
 	IF (LEN(ISNULL(@tenthuoc, '')) = 0)
@@ -396,7 +431,6 @@ BEGIN TRAN
 			
 	IF (@@ERROR <> 0)
 		BEGIN
-			SET @error = N'Không thể cập nhật. Vui lòng thử lại'
 			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
@@ -409,8 +443,7 @@ GO
 --=========================XÓA THÔNG TIN THUỐC=======================================
 
 CREATE OR ALTER PROC sp_XOA_TT_THUOC
-	@ID_THUOC VARCHAR(255),
-	@error nvarchar(500) OUT
+	@ID_THUOC VARCHAR(255)
 AS
 BEGIN TRAN
 
@@ -428,7 +461,6 @@ BEGIN TRAN
 		
 	IF (@@ERROR <> 0)
 		BEGIN
-			SET @error = N'Không thể xóa. Vui lòng thử lại'
 			RAISERROR (N'Không thể xóa. Vui lòng thử lại', 0, 0)
 			ROLLBACK TRAN
 			RETURN
