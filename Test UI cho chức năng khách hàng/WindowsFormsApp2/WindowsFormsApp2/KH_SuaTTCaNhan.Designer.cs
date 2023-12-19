@@ -108,7 +108,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "KH_SuaTTCaNhan";
-            this.Text = "KH_SuaTTCaNhan";
+            this.Text = "Sửa thông tin cá nhân";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KH_SuaTTCaNhan_FormClosing);
             this.Load += new System.EventHandler(this.KH_SuaTTCaNhan_Load);
             this.Shown += new System.EventHandler(this.KH_SuaTTCaNhan_Shown);

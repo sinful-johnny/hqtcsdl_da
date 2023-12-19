@@ -37,6 +37,9 @@
             this.benh_an = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.Register = new System.Windows.Forms.Button();
+            this.listView_LichKham = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button_ThemLichKham = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -108,9 +111,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(481, 33);
+            this.button2.Location = new System.Drawing.Point(457, 33);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 54);
+            this.button2.Size = new System.Drawing.Size(108, 50);
             this.button2.TabIndex = 9;
             this.button2.Text = "Edit personal Informations";
             this.button2.UseVisualStyleBackColor = true;
@@ -126,11 +129,42 @@
             this.Register.UseVisualStyleBackColor = true;
             this.Register.Click += new System.EventHandler(this.Register_Click);
             // 
+            // listView_LichKham
+            // 
+            this.listView_LichKham.HideSelection = false;
+            this.listView_LichKham.Location = new System.Drawing.Point(795, 121);
+            this.listView_LichKham.Name = "listView_LichKham";
+            this.listView_LichKham.Size = new System.Drawing.Size(427, 302);
+            this.listView_LichKham.TabIndex = 11;
+            this.listView_LichKham.UseCompatibleStateImageBehavior = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(795, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 16);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Lịch khám";
+            // 
+            // button_ThemLichKham
+            // 
+            this.button_ThemLichKham.Location = new System.Drawing.Point(795, 34);
+            this.button_ThemLichKham.Name = "button_ThemLichKham";
+            this.button_ThemLichKham.Size = new System.Drawing.Size(113, 49);
+            this.button_ThemLichKham.TabIndex = 13;
+            this.button_ThemLichKham.Text = "Thêm lịch khám";
+            this.button_ThemLichKham.UseVisualStyleBackColor = true;
+            this.button_ThemLichKham.Click += new System.EventHandler(this.button_ThemLichKham_Click);
+            // 
             // KH_TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 435);
+            this.ClientSize = new System.Drawing.Size(1234, 435);
+            this.Controls.Add(this.button_ThemLichKham);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.listView_LichKham);
             this.Controls.Add(this.Register);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.benh_an);
@@ -158,6 +192,9 @@
         private System.Windows.Forms.ListView benh_an;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button Register;
+        private System.Windows.Forms.ListView listView_LichKham;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_ThemLichKham;
     }
 }
 

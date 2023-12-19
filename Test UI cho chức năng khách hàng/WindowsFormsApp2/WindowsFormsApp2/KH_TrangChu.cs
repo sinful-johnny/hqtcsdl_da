@@ -16,6 +16,7 @@ namespace WindowsFormsApp2
         DatabaseAccess db;
         List<TAI_KHOAN> data = new List<TAI_KHOAN>();
         List<BENH_AN> dsBenhAn = new List<BENH_AN>();
+        List<LICH_LAM_VIEC> lich_kham;
         string username_static;
         string password_static;
         public KH_TrangChu()
@@ -61,7 +62,18 @@ namespace WindowsFormsApp2
                 benh_an.Items.Add(newItem);
                 //MessageBox.Show(benhAn.Info);
             }
+        }
 
+        private void UpdateLichKham()
+        {
+            listView_LichKham.Items.Clear();
+            foreach (LICH_LAM_VIEC one in lich_kham)
+            {
+                ListViewItem newItem = new ListViewItem(one.ID_LLV);
+                newItem.SubItems.Add(one.NGAYKHAM.ToShortDateString());
+                newItem.SubItems.Add(one.GIOKHAM.ToString());
+                listView_LichKham.Items.Add(newItem);
+            }
         }
 
         private void dsKH_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,9 +90,11 @@ namespace WindowsFormsApp2
             db = new DatabaseAccess(username.Text, password.Text);
             data = db.loginDB();
             dsBenhAn = db.getBENH_ANs();
+            lich_kham = db.sp_KH_XemLichKham();
             //UpdateDsKH();
             UpdateListView();
             UpdateBenhAn();
+            UpdateLichKham();
             //Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
             //MessageBox.Show(helper.connectionString);
         }
@@ -130,6 +144,11 @@ namespace WindowsFormsApp2
             benh_an.Columns.Add("ID KHACH HANG", 100);
             benh_an.Columns.Add("ID NHA SI", 100);
             benh_an.Columns.Add("NGAY KHAM", 100);
+
+            listView_LichKham.View = View.Details;
+            listView_LichKham.Columns.Add("ID LICH KHAM", 100);
+            listView_LichKham.Columns.Add("NGAY KHAM", 100);
+            listView_LichKham.Columns.Add("GIO KHAM", 100);
         }
 
         private void benh_an_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,6 +171,12 @@ namespace WindowsFormsApp2
         {
             KH_SuaTTCaNhan kH_SuaTTCaNhan_form = new KH_SuaTTCaNhan(this, username_static,password_static); 
             kH_SuaTTCaNhan_form.Show();
+        }
+
+        private void button_ThemLichKham_Click(object sender, EventArgs e)
+        {
+            KH_ThemLichDatKham kH_ThemLichDatKham = new KH_ThemLichDatKham(this, username_static,password_static);
+            kH_ThemLichDatKham.Show();
         }
     }
 }

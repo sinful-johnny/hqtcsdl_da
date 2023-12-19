@@ -49,7 +49,4 @@ E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\Wind
 E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
 >>>>>>> Stashed changes
-E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_SuaTTCaNhan.resources
-E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_TrangChu.resources
-E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_XemChiTietBA.resources
-E:\Github\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_DangKi.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.KH_ThemLichDatKham.resources
