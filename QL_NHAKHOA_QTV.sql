@@ -4,20 +4,60 @@ GO
 EXEC sp_addrole 'QUAN_TRI_VIEN'
 GO
 
---Thêm, xóa, sửa thông tin tài khoản nha sĩ, nhân viên
+--Thêm, xóa, sửa thông tin tài khoản nha sĩ, nhân viên, khách hàng
 
-CREATE OR ALTER VIEW V_THEM_XOA_SUA_TKNHASI_NHANVIEN
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_TK
 AS
 	SELECT*
 	FROM TAI_KHOAN TK
+GO
+
+--Thêm, xóa, sửa thông tin lịch đặt khám cho nha sĩ
+
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_LICHDATKHAM
+AS
+	SELECT*
+	FROM LICH_DAT_KHAM
+GO
+
+--Thêm, xóa, sửa thông tin lịch làm việc cho nha sĩ
+
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_LICHLAMVIEC
+AS
+	SELECT*
+	FROM LICH_LAM_VIEC
+GO
+
+--Thêm, xóa, sửa thông tin dịch vụ sử dụng
+
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_DICHVUSD
+AS
+	SELECT*
+	FROM DICHVU_SD
+GO
+
+--Thêm, xóa, sửa thông tin bệnh án của khách hàng khi cập nhật tài khoản Khách Hàng
+
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_BENHAN
+AS
+	SELECT*
+	FROM BENH_AN
+GO
+
+--Thêm, xóa, sửa thông tin bệnh án của khách hàng khi cập nhật tài khoản Khách Hàng
+
+CREATE OR ALTER VIEW V_THEM_XOA_SUA_BENHAN
+AS
+	SELECT*
+	FROM BENH_AN
 GO
 
 --Xem thông tin tất cả các loại tài khoản
 
 CREATE OR ALTER VIEW V_XEM_TTTK
 AS
-	SELECT*
-	FROM TAI_KHOAN TK
+	SELECT ID_TAIKHOAN, HOTEN, SDT, NGAYSINH, EMAIL, LOAITK
+	FROM TAI_KHOAN
 GO
 
 --Xem, thêm, sửa, xóa thông tin thuốc
@@ -44,7 +84,9 @@ AS
 	FROM THUOC_SD
 GO
 
-GRANT INSERT, UPDATE, DELETE ON V_THEM_XOA_SUA_TKNHASI_NHANVIEN TO QUAN_TRI_VIEN
+GRANT INSERT, UPDATE, DELETE ON V_THEM_XOA_SUA_TK TO QUAN_TRI_VIEN
+
+GRANT INSERT, UPDATE, DELETE ON V_THEM_XOA_SUA_BENHAN TO QUAN_TRI_VIEN
 
 GRANT SELECT ON V_XEM_TTTK TO QUAN_TRI_VIEN
 
@@ -54,3 +96,4 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON V_XEM_THEM_SUA_XOA_SOLUONGTONKHO TO QUAN
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON V_XEM_THEM_SUA_XOA_THUOCSD TO QUAN_TRI_VIEN
 
+GO
