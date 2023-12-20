@@ -208,10 +208,9 @@ create or alter trigger TR_1 on LICH_DAT_KHAM for insert,update
 as
 	if	not exists	(
 						select *
-						from inserted as I, LICH_DAT_KHAM as LDK, LICH_LAM_VIEC as LLV
+						from inserted as I, LICH_LAM_VIEC as LLV
 						where	I.ID_LLV is not null
-								and I.ID_LLV = LDK.ID_LLV
-								and LLV.ID_LLV = LDK.ID_LLV
+								and LLV.ID_LLV = I.ID_LLV
 								and LLV.TRANGTHAI = N'Trống'
 								and datediff(day,LLV.NGAYKHAM,getdate()) <= 0
 					)
@@ -223,6 +222,8 @@ as
 	begin
 		update LICH_LAM_VIEC
 		set TRANGTHAI = N'Đã Đặt'
+		from inserted as I
+		where LICH_LAM_VIEC.ID_LLV = I.ID_LLV
 	end
 go
 

@@ -66,7 +66,7 @@ go
 
 grant select,update on V_KH_TTCANHAN to KHACHHANG
 grant select on V_KH_LICHNHASI to KHACHHANG
-grant select on V_TTNHASI to KHACHHANG
+grant select on V_KH_TTNHASI to KHACHHANG
 grant select on V_KH_BENHAN to KHACHHANG
 grant select, insert, update on V_KH_LICHDATKHAM to KHACHHANG
 grant select on V_KH_XEMDV to KHACHHANG
@@ -100,7 +100,7 @@ as
 		exec sp_addrolemember 'KHACHHANG', @idtk
 go
 
-alter proc sp_KH_XemLichKham 
+create proc sp_KH_XemLichKham 
 as
 	select LNS.*
 	from V_KH_LICHNHASI as LNS
@@ -175,7 +175,7 @@ grant EXECUTE ON OBJECT::sp_KH_XemChiTietThuoc
     TO KHACHHANG;  
 GO
 
-alter proc sp_KH_ThemLichDatKham
+create proc sp_KH_ThemLichDatKham
 	@id_ns varchar(255),
 	@ngaykham datetime,
 	@giokham time(7)
