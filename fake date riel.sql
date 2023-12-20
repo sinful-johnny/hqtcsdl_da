@@ -39,25 +39,25 @@ exec sp_ThemTK N'Hoàng Thị Hương', '07788994438', '1995-06-03', 'hoangthihu
 go
 
 INSERT INTO THUOC VALUES
-(cast(NEWID() as varchar(255)), 'Paracetamol',			N'Đau đầu, sốt', '2023-12-31', 5000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567892')),
+(cast(NEWID() as varchar(255)), 'Paracetamol',			N'Đau đầu, sốt', '2024-12-31', 5000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567892')),
 (cast(NEWID() as varchar(255)), 'Ibuprofen',			N'Đau nhức cơ', '2024-01-15', 7000,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
-(cast(NEWID() as varchar(255)), 'Amoxicillin',			N'Viêm họng', '2023-12-20', 10000,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
+(cast(NEWID() as varchar(255)), 'Amoxicillin',			N'Viêm họng', '2024-12-20', 10000,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Cetirizine',			N'Dị ứng', '2024-02-01', 12000,								(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
-(cast(NEWID() as varchar(255)), 'Omeprazole',			N'Dạ dày', '2023-12-25', 15000,								(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
+(cast(NEWID() as varchar(255)), 'Omeprazole',			N'Dạ dày', '2024-12-25', 15000,								(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Aspirin',				N'Chống đông máu', '2024-01-10', 8000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543213')),
-(cast(NEWID() as varchar(255)), 'Simvastatin',			N'Hạ cholesterol', '2023-12-30', 9000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567892')),
+(cast(NEWID() as varchar(255)), 'Simvastatin',			N'Hạ cholesterol', '2024-12-30', 9000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567892')),
 (cast(NEWID() as varchar(255)), 'Losartan',				N'Hạ huyết áp', '2024-01-05', 11000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
-(cast(NEWID() as varchar(255)), 'Metformin',			N'Điều trị tiểu đường', '2023-12-28', 13000,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
+(cast(NEWID() as varchar(255)), 'Metformin',			N'Điều trị tiểu đường', '2024-12-28', 13000,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Warfarin',				N'Chống đông máu', '2024-01-20', 16000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
-(cast(NEWID() as varchar(255)), 'Lisinopril',			N'Hạ huyết áp', '2023-12-23', 9500,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
+(cast(NEWID() as varchar(255)), 'Lisinopril',			N'Hạ huyết áp', '2024-12-23', 9500,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Atorvastatin',			N'Hạ cholesterol', '2024-01-08', 10500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543213')),
-(cast(NEWID() as varchar(255)), 'Gabapentin',			N'Đau thần kinh', '2023-12-18', 12500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
+(cast(NEWID() as varchar(255)), 'Gabapentin',			N'Đau thần kinh', '2024-12-18', 12500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
 (cast(NEWID() as varchar(255)), 'Amlodipine',			N'Hạ huyết áp', '2024-01-03', 14500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
-(cast(NEWID() as varchar(255)), 'Metoprolol',			N'Hạ nhịp tim', '2023-12-22', 15500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
+(cast(NEWID() as varchar(255)), 'Metoprolol',			N'Hạ nhịp tim', '2024-12-22', 15500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
 (cast(NEWID() as varchar(255)), 'Hydrochlorothiazide',	N'Điều trị tiểu đường', '2024-01-12', 10200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
-(cast(NEWID() as varchar(255)), 'Prednisone',			N'Chống viêm', '2023-12-26', 13200,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
+(cast(NEWID() as varchar(255)), 'Prednisone',			N'Chống viêm', '2024-12-26', 13200,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Diazepam',				N'Lo lắng, căng thẳng', '2024-01-18', 14200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
-(cast(NEWID() as varchar(255)), 'Tramadol',				N'Đau mạch và cơ', '2023-12-29', 15200,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
+(cast(NEWID() as varchar(255)), 'Tramadol',				N'Đau mạch và cơ', '2024-12-29', 15200,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Morphine',				N'Đau nặng', '2024-01-14', 17000,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574'));
 go
 
@@ -86,16 +86,16 @@ go
 
 insert BENH_AN(ID_BA,ID_KH,ID_NS,NGAYKHAM)
 values
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567890'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445'), '2023-01-10'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543210'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437'), '2023-02-15'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0369842157'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876'), '2023-03-22'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0903124578'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789'), '2023-04-10'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0778899443'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'), '2023-05-05'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0567321987'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445'), '2023-06-30'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0912345678'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437'), '2023-07-18'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0888123456'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876'), '2023-08-25'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0999223344'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789'), '2023-09-20'),
-(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0333666999'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'), '2023-10-08');
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567890'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445'), '2024-01-10'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543210'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437'), '2024-02-15'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0369842157'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876'), '2024-03-22'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0903124578'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789'), '2024-04-10'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0778899443'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'), '2024-05-05'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0567321987'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445'), '2024-06-30'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0912345678'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437'), '2024-07-18'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0888123456'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876'), '2024-08-25'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0999223344'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789'), '2024-09-20'),
+(cast(NEWID() as varchar(255)), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0333666999'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'), '2024-10-08');
 go
 
 INSERT INTO THUOC_SD(ID_BA,ID_THUOC,SOLUONG) VALUES
@@ -134,16 +134,16 @@ INSERT INTO HOA_DON(ID_HOADON,ID_NV,ID_BA,TONGTIEN) VALUES
 go
 
 INSERT INTO LICH_LAM_VIEC(ID_LLV,NGAYKHAM,GIOKHAM,TRANGTHAI,ID_NS) VALUES
-(cast(NEWID() as varchar(255)), '2023-12-15', '09:00:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445')),
-(cast(NEWID() as varchar(255)), '2023-12-16', '10:30:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437')),
-(cast(NEWID() as varchar(255)), '2023-12-17', '14:00:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876')),
-(cast(NEWID() as varchar(255)), '2023-12-18', '15:30:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789')),
-(cast(NEWID() as varchar(255)), '2023-12-19', '16:45:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'));
+(cast(NEWID() as varchar(255)), '2024-12-15', '09:00:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09992233445')),
+(cast(NEWID() as varchar(255)), '2024-12-16', '10:30:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994437')),
+(cast(NEWID() as varchar(255)), '2024-12-17', '14:00:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '05673219876')),
+(cast(NEWID() as varchar(255)), '2024-12-18', '15:30:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09123456789')),
+(cast(NEWID() as varchar(255)), '2024-12-19', '16:45:00', N'Trống',		(select ID_TAIKHOAN from TAI_KHOAN where SDT = '08881234567'));
 go
 INSERT INTO LICH_DAT_KHAM(ID_LLV,ID_KH,ID_NV) VALUES
-((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '09992233445' and LLV.NGAYKHAM = '2023-12-15' and LLV.GIOKHAM = '09:00:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0888777666 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567891')),
-((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '07788994437'and LLV.NGAYKHAM = '2023-12-16' and LLV.GIOKHAM = '10:30:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0333666999 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '03336669996')),
-((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '05673219876'and LLV.NGAYKHAM = '2023-12-17' and LLV.GIOKHAM = '14:00:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0911223344 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543212')),
-((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '09123456789'and LLV.NGAYKHAM = '2023-12-18' and LLV.GIOKHAM = '15:30:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0777888999 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245782')),
-((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '08881234567'and LLV.NGAYKHAM = '2023-12-19' and LLV.GIOKHAM = '16:45:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0999223344 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421573'));
+((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '09992233445' and LLV.NGAYKHAM = '2024-12-15' and LLV.GIOKHAM = '09:00:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0888777666 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567891')),
+((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '07788994437'and LLV.NGAYKHAM = '2024-12-16' and LLV.GIOKHAM = '10:30:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0333666999 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '03336669996')),
+((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '05673219876'and LLV.NGAYKHAM = '2024-12-17' and LLV.GIOKHAM = '14:00:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0911223344 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543212')),
+((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '09123456789'and LLV.NGAYKHAM = '2024-12-18' and LLV.GIOKHAM = '15:30:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0777888999 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245782')),
+((select ID_LLV from LICH_LAM_VIEC as LLV inner join TAI_KHOAN as TK on LLV.ID_NS = TK.ID_TAIKHOAN where TK.SDT = '08881234567'and LLV.NGAYKHAM = '2024-12-19' and LLV.GIOKHAM = '16:45:00'), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0999223344 '), (select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421573'));
 go
