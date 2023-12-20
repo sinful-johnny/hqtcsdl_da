@@ -81,21 +81,22 @@ BEGIN
                 INSERT INTO LICH_DAT_KHAM (ID_LLV, ID_KH, ID_NV)
                 VALUES (@ID_LLV, @ID_KH, @ID_NV)
 
-               /* UPDATE LICH_LAM_VIEC
-                SET TRANGTHAI = N'Đã Đặt'
-                WHERE ID_LLV = @ID_LLV AND TRANGTHAI = N'Trống' */
+                /*UPDATE LICH_LAM_VIEC
+                SET TRANGTHAI = N'Đã Đặt'*/
 
-                COMMIT;
+                COMMIT TRAN;
                 PRINT 'Lịch đặt khám đã được thêm thành công.'
             END
         END
         ELSE
         BEGIN
+            ROLLBACK TRAN;
             PRINT 'Lịch làm việc đã được đặt.'
         END
     END
 END
 GO
+
 
 -- INSERT --
 -- INSERT HOA DON -- 
@@ -127,6 +128,10 @@ BEGIN
         INSERT INTO V_HOADON_NHANVIEN (ID_HOADON, ID_NV, ID_BA, TONGTIEN, TONGTIENTHUOC, TONGTIENDV)
         VALUES (@ID_HOADON, @ID_NV, @ID_BA, @TONGTIEN, @TONGTIENTHUOC, @TONGTIENDV);
 
+		UPDATE DICHVU_SD
+        SET ID_HOADON = @ID_HOADON
+        WHERE ID_BA = @ID_BA;
+
         SELECT 
             THUOC.TENTHUOC, 
             THUOC_SD.SOLUONG, 
@@ -139,11 +144,11 @@ BEGIN
         WHERE 
             THUOC_SD.ID_BA = @ID_BA;
 
-        COMMIT;
+        COMMIT TRAN;
         PRINT 'Hoá đơn đã được tạo thành công!';
     END TRY
     BEGIN CATCH
-        ROLLBACK;
+        ROLLBACK TRAN;
         PRINT 'Đã xảy ra lỗi trong quá trình xử lý hoá đơn.';
     END CATCH
 END
