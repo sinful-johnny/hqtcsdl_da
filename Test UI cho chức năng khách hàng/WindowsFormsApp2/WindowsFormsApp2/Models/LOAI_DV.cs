@@ -12,7 +12,7 @@ namespace WindowsFormsApp2
         public string TENDV { get; set; }
         public int GIATIEN { get; set; }
         public string Info { 
-            get { return $"{TENDV} giá {GIATIEN}$"; }
+            get { return $"TEN DICH VU: {TENDV} \nGIA: {GIATIEN}$"; }
         }
     }
 }

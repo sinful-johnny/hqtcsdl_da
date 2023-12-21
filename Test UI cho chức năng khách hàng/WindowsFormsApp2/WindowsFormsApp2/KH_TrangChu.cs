@@ -85,16 +85,23 @@ namespace WindowsFormsApp2
         {
 
             //data = db.GetTAI_KHOANs();
-            username_static = username.Text;
-            password_static = password.Text;
-            db = new DatabaseAccess(username.Text, password.Text);
-            data = db.loginDB();
-            dsBenhAn = db.getBENH_ANs();
-            lich_kham = db.sp_KH_XemLichKham();
-            //UpdateDsKH();
-            UpdateListView();
-            UpdateBenhAn();
-            UpdateLichKham();
+            try
+            {
+                username_static = username.Text;
+                password_static = password.Text;
+                db = new DatabaseAccess(username.Text, password.Text);
+                data = db.loginDB();
+                dsBenhAn = db.getBENH_ANs();
+                lich_kham = db.sp_KH_XemLichKham();
+                //UpdateDsKH();
+                UpdateListView();
+                UpdateBenhAn();
+                UpdateLichKham();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             //Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
             //MessageBox.Show(helper.connectionString);
         }

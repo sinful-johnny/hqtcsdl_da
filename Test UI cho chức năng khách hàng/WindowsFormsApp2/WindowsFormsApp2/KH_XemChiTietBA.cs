@@ -42,10 +42,17 @@ namespace WindowsFormsApp2
             dv_sd.Columns.Add("HOA DON", 100);
 
             //dON_THUOCs = db.GetDON_THUOCs(ID_BA);
-            dICHVU_SDs = db.GetDICHVU_SDs(ID_BA);  
-            THUOC_SDs = db.GetTHUOC_SDs(ID_BA);
-            update_ListView_THUOCSD();
-            update_ListView_DVSD();
+            try
+            {
+                dICHVU_SDs = db.GetDICHVU_SDs(ID_BA);
+                THUOC_SDs = db.GetTHUOC_SDs(ID_BA);
+                update_ListView_THUOCSD();
+                update_ListView_DVSD();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
         public void setControlState(Control Ctl, bool enabled)
         {
@@ -97,13 +104,14 @@ namespace WindowsFormsApp2
             }
 
         }
-
-        //private void don_thuoc_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    List<THUOC> tHUOCs = new List<THUOC>();
-        //    tHUOCs = db.GetTHUOCs(don_thuoc.SelectedItems[0].Text);
-        //    MessageBox.Show(tHUOCs[0].Info);
-        //}
-
+        private void don_thuoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (don_thuoc.SelectedItems.Count > 0)
+            {
+                List<THUOC> tHUOCs = new List<THUOC>();
+                tHUOCs = db.GetTHUOC(don_thuoc.SelectedItems[0].Text);
+                MessageBox.Show(tHUOCs[0].Info);
+            }
+        }
     }
 }

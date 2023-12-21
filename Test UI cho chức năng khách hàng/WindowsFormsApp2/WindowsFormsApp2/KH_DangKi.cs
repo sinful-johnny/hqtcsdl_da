@@ -36,8 +36,17 @@ namespace WindowsFormsApp2
             tAI_KHOAN.MATKHAU = matKhauBox.Text;
 
             DatabaseAccess db_Register = new DatabaseAccess("CHUNG","");
-            db_Register.register(tAI_KHOAN);
-
+            try
+            {
+                db_Register.register(tAI_KHOAN);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MessageBox.Show("Đăng kí thành công!");
+            }
         }
 
         private void KH_DangKi_Shown(object sender, EventArgs e)

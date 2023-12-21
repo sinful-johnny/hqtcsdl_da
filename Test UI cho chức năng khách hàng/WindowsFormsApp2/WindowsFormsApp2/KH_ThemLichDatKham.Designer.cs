@@ -36,6 +36,9 @@
             this.numericUpDown_GioKham_Gio = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_GioKham_Phut = new System.Windows.Forms.NumericUpDown();
             this.button_DangKiKham = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_GioKham_Gio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_GioKham_Phut)).BeginInit();
             this.SuspendLayout();
@@ -78,14 +81,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 114);
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 113);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 7;
             // 
             // numericUpDown_GioKham_Gio
             // 
-            this.numericUpDown_GioKham_Gio.Location = new System.Drawing.Point(31, 175);
+            this.numericUpDown_GioKham_Gio.Location = new System.Drawing.Point(15, 175);
             this.numericUpDown_GioKham_Gio.Maximum = new decimal(new int[] {
             23,
             0,
@@ -97,7 +100,7 @@
             // 
             // numericUpDown_GioKham_Phut
             // 
-            this.numericUpDown_GioKham_Phut.Location = new System.Drawing.Point(125, 175);
+            this.numericUpDown_GioKham_Phut.Location = new System.Drawing.Point(108, 175);
             this.numericUpDown_GioKham_Phut.Maximum = new decimal(new int[] {
             59,
             0,
@@ -109,7 +112,7 @@
             // 
             // button_DangKiKham
             // 
-            this.button_DangKiKham.Location = new System.Drawing.Point(73, 226);
+            this.button_DangKiKham.Location = new System.Drawing.Point(83, 229);
             this.button_DangKiKham.Name = "button_DangKiKham";
             this.button_DangKiKham.Size = new System.Drawing.Size(99, 50);
             this.button_DangKiKham.TabIndex = 10;
@@ -117,11 +120,41 @@
             this.button_DangKiKham.UseVisualStyleBackColor = true;
             this.button_DangKiKham.Click += new System.EventHandler(this.button_DangKiKham_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 16);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Chọn ngày khám";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 16);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Giờ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(105, 156);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 16);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Phút";
+            // 
             // KH_ThemLichDatKham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button_DangKiKham);
             this.Controls.Add(this.numericUpDown_GioKham_Phut);
             this.Controls.Add(this.numericUpDown_GioKham_Gio);
@@ -150,5 +183,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_GioKham_Gio;
         private System.Windows.Forms.NumericUpDown numericUpDown_GioKham_Phut;
         private System.Windows.Forms.Button button_DangKiKham;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

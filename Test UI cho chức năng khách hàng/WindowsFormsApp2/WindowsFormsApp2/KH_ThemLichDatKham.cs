@@ -26,16 +26,23 @@ namespace WindowsFormsApp2
 
         private void KH_ThemLichDatKham_Load(object sender, EventArgs e)
         {
-            list_NhaSiConSlot = db.KH_HoTenNSConSlot();
-            foreach (TAI_KHOAN nhaSi in list_NhaSiConSlot)
+            try
             {
-                comboBox_ChonNhaSi.Items.Add(nhaSi.HOTEN);
+                list_NhaSiConSlot = db.KH_HoTenNSConSlot();
+                foreach (TAI_KHOAN nhaSi in list_NhaSiConSlot)
+                {
+                    comboBox_ChonNhaSi.Items.Add(nhaSi.HOTEN);
+                }
+
+                listView_LichLamViec.View = View.Details;
+                listView_LichLamViec.Columns.Add("ID LICH LAM VIEC", 100);
+                listView_LichLamViec.Columns.Add("NGAY KHAM", 100);
+                listView_LichLamViec.Columns.Add("GIO KHAM", 100);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
             
-            listView_LichLamViec.View = View.Details;
-            listView_LichLamViec.Columns.Add("ID LICH LAM VIEC", 100);
-            listView_LichLamViec.Columns.Add("NGAY KHAM", 100);
-            listView_LichLamViec.Columns.Add("GIO KHAM", 100);
         }
 
         public void setControlState(Control Ctl, bool enabled)
@@ -69,29 +76,38 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button_Search_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox_ChonNhaSi_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox_ChonNhaSi.SelectedItem != null)
+            try
             {
-                string HOTEN_NS = comboBox_ChonNhaSi.SelectedItem.ToString();
-                TAI_KHOAN Selected_NS = list_NhaSiConSlot.Where(NS => NS.HOTEN == HOTEN_NS).ToList().FirstOrDefault();
-                lICH_LAM_VIECs = db.sp_KH_XemLLVcuaNS(Selected_NS.ID_TAIKHOAN);
-                update_ListView_LichLamViec();
+                if (comboBox_ChonNhaSi.SelectedItem != null)
+                {
+                    string HOTEN_NS = comboBox_ChonNhaSi.SelectedItem.ToString();
+                    TAI_KHOAN Selected_NS = list_NhaSiConSlot.Where(NS => NS.HOTEN == HOTEN_NS).ToList().FirstOrDefault();
+                    lICH_LAM_VIECs = db.sp_KH_XemLLVcuaNS(Selected_NS.ID_TAIKHOAN);
+                    update_ListView_LichLamViec();
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
+            
         }
 
         private void button_DangKiKham_Click(object sender, EventArgs e)
         {
-            string gioKham = $"" + numericUpDown_GioKham_Gio.Value.ToString().PadLeft(2, '0') + ":" + numericUpDown_GioKham_Phut.Value.ToString().PadLeft(2,'0') + ":00.0000000";
-            //MessageBox.Show(gioKham);
-            string HOTEN_NS = comboBox_ChonNhaSi.SelectedItem.ToString();
-            TAI_KHOAN Selected_NS = list_NhaSiConSlot.Where(NS => NS.HOTEN == HOTEN_NS).ToList().FirstOrDefault();
-            db.sp_KH_ThemLichDatKham(Selected_NS.ID_TAIKHOAN, dateTimePicker1.Value.ToShortDateString(), gioKham);
+            try
+            {
+                string gioKham = $"" + numericUpDown_GioKham_Gio.Value.ToString().PadLeft(2, '0') + ":" + numericUpDown_GioKham_Phut.Value.ToString().PadLeft(2, '0') + ":00.0000000";
+                //MessageBox.Show(gioKham);
+                string HOTEN_NS = comboBox_ChonNhaSi.SelectedItem.ToString();
+                TAI_KHOAN Selected_NS = list_NhaSiConSlot.Where(NS => NS.HOTEN == HOTEN_NS).ToList().FirstOrDefault();
+                db.sp_KH_ThemLichDatKham(Selected_NS.ID_TAIKHOAN, dateTimePicker1.Value.ToShortDateString(), gioKham);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
         }
     }
 }

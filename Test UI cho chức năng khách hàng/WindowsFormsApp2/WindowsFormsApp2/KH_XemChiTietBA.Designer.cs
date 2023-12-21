@@ -42,6 +42,7 @@
             this.don_thuoc.Size = new System.Drawing.Size(776, 174);
             this.don_thuoc.TabIndex = 0;
             this.don_thuoc.UseCompatibleStateImageBehavior = false;
+            this.don_thuoc.SelectedIndexChanged += new System.EventHandler(this.don_thuoc_SelectedIndexChanged);
             // 
             // label1
             // 

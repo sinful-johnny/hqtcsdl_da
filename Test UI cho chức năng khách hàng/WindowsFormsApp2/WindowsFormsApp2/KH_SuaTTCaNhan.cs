@@ -28,7 +28,18 @@ namespace WindowsFormsApp2
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            db.SuaTTCaNhan(hoTenBox.Text,ngaySinhPicker.Value,emailBox.Text);
+            try
+            {
+                db.SuaTTCaNhan(hoTenBox.Text, ngaySinhPicker.Value, emailBox.Text);
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MessageBox.Show("Sửa thành công!");
+            }
+           
         }
         public void setControlState(Control Ctl, bool enabled)
         {
@@ -48,11 +59,18 @@ namespace WindowsFormsApp2
 
         private void KH_SuaTTCaNhan_Load(object sender, EventArgs e)
         {
-            List<TAI_KHOAN> retrievedData = db.loginDB();
-            current_user =retrievedData.First();
-            hoTenBox.Text = current_user.HOTEN;
-            ngaySinhPicker.Value = current_user.NGAYSINH;
-            emailBox.Text = current_user.EMAIL;
+            try
+            {
+                List<TAI_KHOAN> retrievedData = db.loginDB();
+                current_user = retrievedData.First();
+                hoTenBox.Text = current_user.HOTEN;
+                ngaySinhPicker.Value = current_user.NGAYSINH;
+                emailBox.Text = current_user.EMAIL;
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

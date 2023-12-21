@@ -17,7 +17,7 @@ namespace WindowsFormsApp2
         {
             get
             {
-                return $"{ID_THUOC} {TENTHUOC} {GIATIEN} {CHIDINH}";
+                return $"ID THUOC: {ID_THUOC} \nTEN THUOC: {TENTHUOC} \nGIA TIEN: {GIATIEN} \nCHI DINH: {CHIDINH}";
             }
         }
     }

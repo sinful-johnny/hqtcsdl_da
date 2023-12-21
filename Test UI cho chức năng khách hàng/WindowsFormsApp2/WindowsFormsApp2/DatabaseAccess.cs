@@ -91,6 +91,16 @@ namespace WindowsFormsApp2
                 return output;
             }
         }
+
+        public List<THUOC> GetTHUOC (string ID_THUOC)
+        {
+            Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(helper.connectionString))
+            {
+                var output = connection.Query<THUOC>($"sp_KH_XemChiTietThuoc '" + ID_THUOC + "'").ToList();
+                return output;
+            }
+        }
         public void register(TAI_KHOAN tk)
         {
             Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", USERID, PASSWORD);
