@@ -32,24 +32,24 @@ BEGIN TRAN
 	DECLARE @id_qtv VARCHAR(255)
 	SET @id_qtv = CURRENT_USER
 	print @id_qtv
-	INSERT INTO V_THEM_XOA_SUA_TKNHASI_NHANVIEN(
-												ID_TAIKHOAN,
-												HOTEN,
-												SDT,
-												NGAYSINH,
-												EMAIL,
-												MATKHAU,
-												LOAITK,
-												ID_QTV)
+	INSERT INTO V_THEM_XOA_SUA_TK(
+									ID_TAIKHOAN,
+									HOTEN,
+									SDT,
+									NGAYSINH,
+									EMAIL,
+									MATKHAU,
+									LOAITK,
+									ID_QTV)
 
-VALUES											(@ID_TK,
-												@tentaikhoan,
-												@sdt,
-												@ngaysinh,
-												@email,
-												@matkhau,
-												@loaitaikhoan,
-												@id_qtv)
+VALUES								(@ID_TK,
+									@tentaikhoan,
+									@sdt,
+									@ngaysinh,
+									@email,
+									@matkhau,
+									@loaitaikhoan,
+									@id_qtv)
 			
 	IF (@@ERROR <> 0)
 		BEGIN
@@ -92,11 +92,11 @@ GO
 CREATE OR ALTER PROC sp_XOA_TAIKHOAN
 	@idtaikhoan VARCHAR(255)
 AS
-	IF EXISTS(SELECT* FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+	IF EXISTS(SELECT* FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
 		BEGIN
 			-- Xóa login
 			DECLARE @sdt CHAR(11)
-			SET @sdt = (SELECT SDT FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+			SET @sdt = (SELECT SDT FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
 			exec sp_droplogin @sdt
 
 
@@ -152,7 +152,7 @@ AS
 
 BEGIN TRAN
 	DECLARE @OLDloaitaikhoan varchar(20)
-	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TKNHASI_NHANVIEN WHERE ID_TAIKHOAN = @idtaikhoan)
+	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
 	IF (@OLDloaitaikhoan = '')
 		BEGIN
 			RAISERROR (N'Không tồn tại id tài khoản. Vui lòng thử lại', 0, 0)
@@ -190,7 +190,7 @@ BEGIN TRAN
 		END
 
 
-	UPDATE V_THEM_XOA_SUA_TKNHASI_NHANVIEN
+	UPDATE V_THEM_XOA_SUA_TK
 	SET HOTEN = @tentaikhoan,
 		NGAYSINH = @ngaysinh,
 		EMAIL = @email,
@@ -524,5 +524,9 @@ GRANT EXECUTE ON OBJECT::sp_CAPNHAT_TT_THUOC
 GO
 
 GRANT EXECUTE ON OBJECT::sp_XOA_TT_THUOC
+    TO QUAN_TRI_VIEN;  
+GO
+
+GRANT EXECUTE ON OBJECT::sp_KHOA_ALL_TAIKHOAN_NGUOIDUNG
     TO QUAN_TRI_VIEN;  
 GO
