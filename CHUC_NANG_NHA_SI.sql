@@ -45,9 +45,9 @@ GO
 -- UPDATE / INSERT -- 
 -- 1. UPDATE THONG TIN CA NHAN
 CREATE OR ALTER PROC SP_NS_SUA_TTCANHAN
-	@tentaikhoan NVARCHAR(30) = NULL,
-	@ngaysinh DATE = NULL,
-	@email VARCHAR(30) = NULL
+	@tentaikhoan NVARCHAR(30),
+	@ngaysinh DATE,
+	@email VARCHAR(30)
 AS
 
 BEGIN TRAN
