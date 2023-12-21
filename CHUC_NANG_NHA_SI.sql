@@ -97,7 +97,7 @@ BEGIN TRAN
 	DECLARE @ID_NS VARCHAR(255)
 	SET @ID_NS = CURRENT_USER
 
-	INSERT INTO V_THEM_BENHAN(
+	INSERT INTO V_THEM_BENH_AN(
 											ID_BA,
 											ID_KH,
 											ID_NS,
@@ -142,6 +142,17 @@ BEGIN TRAN
 			SET @ID_HOADON = (SELECT ID_HOADON FROM DICHVU_SD WHERE ID_BA = @ID_BA)
 		END	
 
+	INSERT INTO V_GHI_DICHVU_SD(			
+											ID_LOAIDV,
+											THANHTIEN,
+											ID_HOADON,
+											ID_BA)
+
+	VALUES									(@ID_LOAIDV,
+											@THANHTIEN,
+											@ID_HOADON,
+											@ID_BA)
+
 	IF (@@ERROR <> 0)
 		BEGIN
 			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
@@ -161,7 +172,17 @@ BEGIN TRAN
 	DECLARE @ID_LOAIDV VARCHAR(255)
 	EXEC sp_TAOID @ID_LOAIDV OUTPUT
 
-	INSERT INTO V_THEM_BENHAN(
+	IF (LEN(ISNULL(@TENDV, '')) = 0)
+		BEGIN
+			SET @TENDV = (SELECT TENDV FROM LOAI_DV WHERE ID_LOAIDV = @ID_LOAIDV)
+		END	
+
+	IF (LEN(ISNULL(@GIATIEN, '')) = 0)
+		BEGIN
+			SET @GIATIEN = (SELECT GIATIEN FROM LOAI_DV WHERE ID_LOAIDV = @ID_LOAIDV)
+		END	
+
+	INSERT INTO V_TT_LOAI_DICHVU(
 											ID_LOAIDV,
 											TENDV,
 											GIATIEN)
@@ -194,6 +215,15 @@ BEGIN TRAN
 		BEGIN
 			SET @SOLUONG = (SELECT SOLUONG FROM THUOC_SD WHERE ID_BA = @ID_BA)
 		END
+
+	INSERT INTO V_KEDONTHUOC(
+											ID_BA,
+											ID_THUOC,
+											SOLUONG)
+
+	VALUES									(@ID_BA,
+											@ID_THUOC,
+											@SOLUONG)
 
 	IF (@@ERROR <> 0)
 		BEGIN
@@ -271,6 +301,20 @@ BEGIN TRAN
 		BEGIN
 			SET @TRANGTHAI = (SELECT TRANGTHAI FROM LICH_LAM_VIEC WHERE ID_LLV = @ID_LLV)
 		END
+
+	INSERT INTO V_XEM_THEM_SUA_LICHLAMVIEC(
+											ID_LLV,
+											NGAYKHAM,
+											GIOKHAM,
+											TRANGTHAI,
+											ID_NS)
+
+	VALUES									(@ID_LLV,
+											@NGAYKHAM,
+											@GIOKHAM,
+											@TRANGTHAI,
+											@ID_NS)
+
 	IF (@@ERROR <> 0)
 		BEGIN
 			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
