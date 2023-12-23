@@ -1,4 +1,39 @@
-﻿-- Code Proc bị lỗi
+﻿--Fix lỗi chức năng 1
+alter proc sp_KH_SuaTTCaNhan
+	@hoten nvarchar(30),
+	@ngaysinh date,
+	@email varchar(30)
+as
+	begin tran
+		SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+		if	@hoten is null
+		begin
+			select @hoten = HOTEN
+			from V_KH_TTCANHAN
+			where ID_TAIKHOAN = CURRENT_USER
+		end
+
+		if	@ngaysinh is null
+		begin
+			select @ngaysinh = NGAYSINH
+			from V_KH_TTCANHAN
+			where ID_TAIKHOAN = CURRENT_USER
+		end
+
+		if	@email is null
+		begin
+			select @email = EMAIL
+			from V_KH_TTCANHAN
+			where ID_TAIKHOAN = CURRENT_USER
+		end
+		WAITFOR DELAY '00:00:10'
+		update V_KH_TTCANHAN
+		set HOTEN = @hoten, NGAYSINH = @ngaysinh, EMAIL = @email
+		where ID_TAIKHOAN = CURRENT_USER
+	commit tran
+go
+
+--Fix lỗi chức năng 2
 CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 	@idtaikhoan VARCHAR(255),
 	@tentaikhoan NVARCHAR(30) = NULL,
@@ -8,6 +43,7 @@ CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 AS
 
 BEGIN TRAN
+	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	DECLARE @OLDloaitaikhoan varchar(20)
 	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
 	IF (@OLDloaitaikhoan = '')
@@ -62,20 +98,3 @@ BEGIN TRAN
 		END
 COMMIT TRAN
 GO
-
---Demo lỗi---------------------------------------------------
-declare @idtaikhoan VARCHAR(255),
-	@tentaikhoan NVARCHAR(30) = NULL,
-	@ngaysinh DATE = NULL,
-	@email VARCHAR(30) = NULL,
-	@loaitaikhoan varchar(20) = NULL
-
-select @idtaikhoan = ID_TAIKHOAN
-from TAI_KHOAN
-where SDT = '0911122334'
-
-set @ngaysinh = '2022-1-1'
-set @email = 'sieudeptrai@game.com'
-
-exec sp_CAPNHAT_TAIKHOAN_NGUOIDUNG @idtaikhoan, @tentaikhoan, @ngaysinh, @email, @loaitaikhoan
-select * from TAI_KHOAN where SDT = '0911122334'
