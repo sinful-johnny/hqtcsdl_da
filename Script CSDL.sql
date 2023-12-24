@@ -332,7 +332,7 @@ as
 	if exists	(
 					select *
 					from inserted
-					where datediff(day,'2023-12-30',getdate()) > 0
+					where datediff(day,NGAYSINH,getdate()) > 0
 				)
 	begin
 		;throw 50008, N'Ngày sinh không hợp lệ', 1
