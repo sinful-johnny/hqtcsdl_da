@@ -4,8 +4,8 @@ alter proc sp_KH_SuaTTCaNhan
 	@ngaysinh date,
 	@email varchar(30)
 as
-	begin tran
-		SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+	begin transaction
+		SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 		if	@hoten is null
 		begin
 			select @hoten = HOTEN
@@ -30,7 +30,17 @@ as
 		update V_KH_TTCANHAN
 		set HOTEN = @hoten, NGAYSINH = @ngaysinh, EMAIL = @email
 		where ID_TAIKHOAN = CURRENT_USER
-	commit tran
+
+		SELECT CASE transaction_isolation_level 
+    WHEN 0 THEN 'Unspecified' 
+    WHEN 1 THEN 'ReadUncommitted' 
+    WHEN 2 THEN 'ReadCommitted' 
+    WHEN 3 THEN 'Repeatable' 
+    WHEN 4 THEN 'Serializable' 
+    WHEN 5 THEN 'Snapshot' END AS TRANSACTION_ISOLATION_LEVEL 
+FROM sys.dm_exec_sessions 
+where session_id = @@SPID
+	commit transaction
 go
 
 --Fix lỗi chức năng 2
@@ -42,14 +52,14 @@ CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 	@loaitaikhoan varchar(20) = NULL
 AS
 
-BEGIN TRAN
-	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+BEGIN transaction
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 	DECLARE @OLDloaitaikhoan varchar(20)
 	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
 	IF (@OLDloaitaikhoan = '')
 		BEGIN
 			RAISERROR (N'Không tồn tại id tài khoản. Vui lòng thử lại', 0, 0)
-			ROLLBACK TRAN
+			ROLLBACK transaction
 			RETURN
 		END
 
@@ -93,8 +103,19 @@ BEGIN TRAN
 	IF (@@ERROR <> 0)
 		BEGIN
 			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
-			ROLLBACK TRAN
+			ROLLBACK transaction
 			RETURN
 		END
-COMMIT TRAN
+
+		SELECT CASE transaction_isolation_level 
+    WHEN 0 THEN 'Unspecified' 
+    WHEN 1 THEN 'ReadUncommitted' 
+    WHEN 2 THEN 'ReadCommitted' 
+    WHEN 3 THEN 'Repeatable' 
+    WHEN 4 THEN 'Serializable' 
+    WHEN 5 THEN 'Snapshot' END AS TRANSACTION_ISOLATION_LEVEL 
+FROM sys.dm_exec_sessions 
+where session_id = @@SPID
+
+COMMIT transaction
 GO

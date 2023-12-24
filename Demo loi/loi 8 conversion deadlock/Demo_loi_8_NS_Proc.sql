@@ -1,0 +1,49 @@
+﻿use QL_NHAKHOA
+go
+drop proc SP_NS_SUA_TTCANHAN
+go
+CREATE PROC SP_NS_SUA_TTCANHAN
+	@tentaikhoan NVARCHAR(30),
+	@ngaysinh DATE,
+	@email VARCHAR(30)
+AS
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+BEGIN TRAN
+	DECLARE @idtaikhoan VARCHAR(255)
+	SET @idtaikhoan = CURRENT_USER
+
+	IF (LEN(ISNULL(@tentaikhoan, '')) = 0)
+		BEGIN
+			SET @tentaikhoan = (SELECT HOTEN FROM TAI_KHOAN WITH (HOLDLOCK,UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+
+	IF (LEN(ISNULL(@ngaysinh, '')) = 0)
+		BEGIN
+			SET @ngaysinh = (SELECT NGAYSINH FROM TAI_KHOAN WITH (HOLDLOCK,UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+
+	IF (LEN(ISNULL(@email, '')) = 0)
+		BEGIN
+			SET @email = (SELECT EMAIL FROM TAI_KHOAN WITH (HOLDLOCK,UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
+		END
+	
+	WAITFOR DELAY '00:00:20'
+
+	UPDATE V_TKNHASI WITH (HOLDLOCK,UPDLOCK)
+	SET HOTEN = @tentaikhoan,
+		NGAYSINH = @ngaysinh,
+		EMAIL = @email
+	WHERE ID_TAIKHOAN = @idtaikhoan
+			
+	IF (@@ERROR <> 0)
+		BEGIN
+			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+COMMIT TRAN
+GO
+GRANT EXECUTE ON OBJECT::SP_NS_SUA_TTCANHAN
+    TO NHA_SI;  
+GO
+
