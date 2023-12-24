@@ -12,6 +12,7 @@ declare @idthuoc VARCHAR(255),
 
 set @idthuoc = (select top 1 ID_THUOC
 				from THUOC)
+set @tenthuoc = N'thuôc đau dạ dày'
 set @ngayhethan = '2/2/2003'
 set @soluong = 10
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED

@@ -10,11 +10,12 @@ declare @idthuoc VARCHAR(255),
 		@giatien money = NULL,
 		@soluong int
 
-set @idthuoc = '02FEED91-BC50-4351-A896-9C89796E3DE7'
-set @tenthuoc = N'đau dạ dày'
-set @ngayhethan = '2/2/2003'
-set @soluong = 10
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+set @idthuoc = (select top 1 ID_THUOC
+				from THUOC)
+set @tenthuoc = N'Thuốc Chống lão hóa'
+set @ngayhethan = '2/5/2024'
+set @soluong = 69
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 exec sp_CAPNHAT_TT_THUOC @idthuoc, 
 						 @tenthuoc, 
 						 @chidinh,
