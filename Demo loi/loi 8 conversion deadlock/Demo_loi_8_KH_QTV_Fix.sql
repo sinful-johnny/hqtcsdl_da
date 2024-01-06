@@ -5,32 +5,32 @@ create or alter proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
 	@ngaysinh date,
 	@email varchar(30)
-AS SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+AS SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	begin tran
 		if	@hoten is null
 		begin
 			select @hoten = HOTEN
-			from V_KH_TTCANHAN
+			from V_KH_TTCANHAN WITH (HOLDLOCK, UPDLOCK)
 			where ID_TAIKHOAN = CURRENT_USER
 		end
 
 		if	@ngaysinh is null
 		begin
 			select @ngaysinh = NGAYSINH
-			from V_KH_TTCANHAN
+			from V_KH_TTCANHAN WITH (HOLDLOCK, UPDLOCK)
 			where ID_TAIKHOAN = CURRENT_USER
 		end
 
 		if	@email is null
 		begin
 			select @email = EMAIL
-			from V_KH_TTCANHAN
+			from V_KH_TTCANHAN WITH (HOLDLOCK, UPDLOCK)
 			where ID_TAIKHOAN = CURRENT_USER
 		end
 
 		WAITFOR DELAY '00:00:10'
 
-		update V_KH_TTCANHAN
+		update V_KH_TTCANHAN WITH (HOLDLOCK, UPDLOCK)
 		set HOTEN = @hoten, NGAYSINH = @ngaysinh, EMAIL = @email
 		where ID_TAIKHOAN = CURRENT_USER
 	commit tran
@@ -43,10 +43,10 @@ CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 	@ngaysinh DATE = NULL,
 	@email VARCHAR(30) = NULL,
 	@loaitaikhoan varchar(20) = NULL
-AS SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+AS SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 BEGIN TRAN
 	DECLARE @OLDloaitaikhoan varchar(20)
-	SET @OLDloaitaikhoan = (SELECT LOAITK FROM V_THEM_XOA_SUA_TK WHERE ID_TAIKHOAN = @idtaikhoan)
+	SET @OLDloaitaikhoan = (SELECT LOAITK FROM TAI_KHOAN WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
 	IF (@OLDloaitaikhoan = '')
 		BEGIN
 			RAISERROR (N'Không tồn tại id tài khoản. Vui lòng thử lại', 0, 0)
@@ -56,25 +56,25 @@ BEGIN TRAN
 
 	IF (LEN(ISNULL(@tentaikhoan, '')) = 0)
 		BEGIN
-			SET @tentaikhoan = (SELECT HOTEN FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+			SET @tentaikhoan = (SELECT HOTEN FROM TAI_KHOAN  WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
 		END
 
 
 	IF (LEN(ISNULL(@ngaysinh, '')) = 0)
 		BEGIN
-			SET @ngaysinh = (SELECT NGAYSINH FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+			SET @ngaysinh = (SELECT NGAYSINH FROM TAI_KHOAN  WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
 		END
 
 
 	IF (LEN(ISNULL(@email, '')) = 0)
 		BEGIN
-			SET @email = (SELECT EMAIL FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+			SET @email = (SELECT EMAIL FROM TAI_KHOAN  WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
 		END
 
 
 	IF (LEN(ISNULL(@loaitaikhoan, '')) = 0)
 		BEGIN
-			SET @loaitaikhoan = (SELECT LOAITK FROM TAI_KHOAN WHERE ID_TAIKHOAN = @idtaikhoan)
+			SET @loaitaikhoan = (SELECT LOAITK FROM TAI_KHOAN WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
 		END
 	ELSE IF (@loaitaikhoan = 'QTV')
 		BEGIN
@@ -85,7 +85,7 @@ BEGIN TRAN
 
 	WAITFOR DELAY '00:00:10'
 
-	UPDATE V_THEM_XOA_SUA_TK
+	UPDATE V_THEM_XOA_SUA_TK  WITH (HOLDLOCK, UPDLOCK)
 	SET HOTEN = @tentaikhoan,
 		NGAYSINH = @ngaysinh,
 		EMAIL = @email,
