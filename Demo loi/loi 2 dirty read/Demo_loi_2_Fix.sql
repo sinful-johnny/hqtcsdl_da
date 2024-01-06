@@ -1,7 +1,8 @@
 ﻿use QL_NHAKHOA
-GO
+go
 create or  alter trigger TR_6 on THUOC for insert,update
 as
+	select * from inserted
 	if exists	(
 					select *
 					from inserted as I
@@ -14,6 +15,13 @@ as
 	end
 go
 
+alter proc sp_KH_XemDSThuoc
+as
+	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+	select *
+	from V_KH_XEMTHUOC
+go
+
 CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
 	@ID_THUOC VARCHAR(255),
 	@tenthuoc NVARCHAR(30) = NULL,
@@ -22,7 +30,7 @@ CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
 	@giatien MONEY = NULL,
 	@soluong int = NULL
 AS
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 BEGIN TRAN
 	IF (LEN(ISNULL(@tenthuoc, '')) = 0)
 		BEGIN
@@ -74,13 +82,4 @@ BEGIN TRAN
 			RETURN
 		END
 COMMIT TRAN
-GO
-
-CREATE OR ALTER PROC SP_NV_XEMTTTHUOC
-AS
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-BEGIN
-	SELECT * 
-	FROM V_DANHMUC_THUOC 
-END
 GO

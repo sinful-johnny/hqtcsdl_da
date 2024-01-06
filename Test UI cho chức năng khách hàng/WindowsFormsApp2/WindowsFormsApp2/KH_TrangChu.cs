@@ -101,6 +101,11 @@ namespace WindowsFormsApp2
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                button2.Show();
+                button_ThemLichKham.Show();
+            }
             
             //Helper helper = new Helper("DESKTOP-CDH2DEU\\SQLSERVER", "QL_NHAKHOA", "sa", "123");
             //MessageBox.Show(helper.connectionString);
@@ -156,6 +161,9 @@ namespace WindowsFormsApp2
             listView_LichKham.Columns.Add("ID LICH KHAM", 100);
             listView_LichKham.Columns.Add("NGAY KHAM", 100);
             listView_LichKham.Columns.Add("GIO KHAM", 100);
+
+            button2.Hide();
+            button_ThemLichKham.Hide();
         }
 
         private void benh_an_SelectedIndexChanged(object sender, EventArgs e)

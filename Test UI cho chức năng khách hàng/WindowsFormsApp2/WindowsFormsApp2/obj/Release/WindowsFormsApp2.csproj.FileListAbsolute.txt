@@ -1,0 +1,17 @@
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Release\WindowsFormsApp2.exe.config
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Release\WindowsFormsApp2.exe
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Release\WindowsFormsApp2.pdb
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Release\Dapper.dll
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\bin\Release\Dapper.xml
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.csproj.AssemblyReference.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.KH_SuaTTCaNhan.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.KH_ThemLichDatKham.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.KH_TrangChu.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.KH_XemChiTietBA.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.KH_DangKi.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.Properties.Resources.resources
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.csproj.GenerateResource.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.csproj.CopyComplete
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.exe
+C:\Users\Lenovo\OneDrive\Documents\GitHub\hqtcsdl_da\Test UI cho chức năng khách hàng\WindowsFormsApp2\WindowsFormsApp2\obj\Release\WindowsFormsApp2.pdb

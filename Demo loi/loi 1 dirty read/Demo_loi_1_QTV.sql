@@ -3,7 +3,6 @@ GO
 
 --sp_thêm thông tin thuốc
 
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 declare	@tenthuoc NVARCHAR(30),
 		@chidinh NVARCHAR(100),
 		@ngayhethan DATE,

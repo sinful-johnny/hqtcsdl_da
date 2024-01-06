@@ -95,9 +95,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 207);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.Size = new System.Drawing.Size(52, 16);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Bệnh án";
+            this.label2.Text = "Record";
             // 
             // benh_an
             // 
@@ -143,9 +143,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(795, 99);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 16);
+            this.label3.Size = new System.Drawing.Size(64, 16);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Lịch khám";
+            this.label3.Text = "Schedule";
             // 
             // button_ThemLichKham
             // 
@@ -153,7 +153,7 @@
             this.button_ThemLichKham.Name = "button_ThemLichKham";
             this.button_ThemLichKham.Size = new System.Drawing.Size(113, 49);
             this.button_ThemLichKham.TabIndex = 13;
-            this.button_ThemLichKham.Text = "Thêm lịch khám";
+            this.button_ThemLichKham.Text = "Add schedule";
             this.button_ThemLichKham.UseVisualStyleBackColor = true;
             this.button_ThemLichKham.Click += new System.EventHandler(this.button_ThemLichKham_Click);
             // 

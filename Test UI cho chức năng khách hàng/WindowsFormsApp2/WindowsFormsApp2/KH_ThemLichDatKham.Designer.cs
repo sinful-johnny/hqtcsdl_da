@@ -78,6 +78,7 @@
             this.listView_LichLamViec.Size = new System.Drawing.Size(360, 377);
             this.listView_LichLamViec.TabIndex = 6;
             this.listView_LichLamViec.UseCompatibleStateImageBehavior = false;
+            this.listView_LichLamViec.SelectedIndexChanged += new System.EventHandler(this.listView_LichLamViec_SelectedIndexChanged);
             // 
             // dateTimePicker1
             // 

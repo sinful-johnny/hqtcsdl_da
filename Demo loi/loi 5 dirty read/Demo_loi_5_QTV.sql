@@ -15,7 +15,7 @@ set @tentaikhoan = 'lemao'
 set @ngaysinh = '12/12/2025'
 set @email = 'lemaobruh@gmail.com'
 
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+
 exec sp_CAPNHAT_TAIKHOAN_NGUOIDUNG @idtaikhoan, @tentaikhoan, @ngaysinh, @email, @loaitaikhoan
 go
 

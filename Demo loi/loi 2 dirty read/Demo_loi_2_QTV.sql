@@ -12,13 +12,13 @@ declare @idthuoc VARCHAR(255),
 
 select @idthuoc = ID_THUOC
 from THUOC
-where TENTHUOC = N'đau dạ dày'
+where TENTHUOC = N'Atorvastatin'
 
-set @tenthuoc = N'đau dạ dày'
+set @tenthuoc = N'Atorvastatin'
 set @ngayhethan = '2/2/2003'
-set @soluong = 10
+set @soluong = 100
 
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+
 exec sp_CAPNHAT_TT_THUOC @idthuoc, 
 						 @tenthuoc, 
 						 @chidinh,

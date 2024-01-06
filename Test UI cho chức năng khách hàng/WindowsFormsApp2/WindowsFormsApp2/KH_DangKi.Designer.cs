@@ -127,7 +127,7 @@
             this.SendRegister.Name = "SendRegister";
             this.SendRegister.Size = new System.Drawing.Size(135, 67);
             this.SendRegister.TabIndex = 10;
-            this.SendRegister.Text = "Register";
+            this.SendRegister.Text = "Đăng kí";
             this.SendRegister.UseVisualStyleBackColor = true;
             this.SendRegister.Click += new System.EventHandler(this.SendRegister_Click);
             // 

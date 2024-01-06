@@ -107,7 +107,23 @@ namespace WindowsFormsApp2
             {
                 MessageBox.Show(ex.ToString());
             }
+            finally
+            {
+                MessageBox.Show("Đăng kí thành công!");
+            }
             
+        }
+
+        private void listView_LichLamViec_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView_LichLamViec.SelectedItems.Count > 0)
+            {
+                //TAI_KHOAN Selected_NS = list_NhaSiConSlot.Where(NS => NS.HOTEN == HOTEN_NS).ToList().FirstOrDefault();
+                dateTimePicker1.Text = listView_LichLamViec.SelectedItems[0].SubItems[1].Text;
+                DateTime giokham = DateTime.ParseExact(listView_LichLamViec.SelectedItems[0].SubItems[2].Text, "H:m:s", null);
+                numericUpDown_GioKham_Gio.Value = giokham.Hour;
+                numericUpDown_GioKham_Phut.Value = giokham.Minute;
+            }
         }
     }
 }

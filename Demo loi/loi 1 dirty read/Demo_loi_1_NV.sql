@@ -3,6 +3,5 @@ GO
 
 --sp_xem thông tin thuốc
 
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 exec SP_NV_XEMTTTHUOC
 go
