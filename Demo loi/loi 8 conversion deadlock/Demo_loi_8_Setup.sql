@@ -1,6 +1,6 @@
 ﻿use QL_NHAKHOA
 go
-
+--
 create or alter proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
 	@ngaysinh date,
