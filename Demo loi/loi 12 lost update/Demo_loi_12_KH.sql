@@ -6,7 +6,7 @@ declare @hoten nvarchar(30),
 	@email varchar(30)
 
 set @hoten = 'dude'
---set @email = 'dude@website.com'
+set @email = 'dude@website.com'
 set @ngaysinh = NULL
 
 exec sp_KH_SuaTTCaNhan @hoten, @ngaysinh, @email
