@@ -5,7 +5,7 @@ create or alter proc sp_KH_SuaTTCaNhan
 	@hoten nvarchar(30),
 	@ngaysinh date,
 	@email varchar(30)
-AS SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+AS
 	begin tran
 		if	@hoten is null
 		begin
@@ -43,7 +43,7 @@ CREATE OR ALTER PROC sp_CAPNHAT_TAIKHOAN_NGUOIDUNG
 	@ngaysinh DATE = NULL,
 	@email VARCHAR(30) = NULL,
 	@loaitaikhoan varchar(20) = NULL
-AS SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+AS
 BEGIN TRAN
 	DECLARE @OLDloaitaikhoan varchar(20)
 	SET @OLDloaitaikhoan = (SELECT LOAITK FROM TAI_KHOAN WITH (HOLDLOCK, UPDLOCK) WHERE ID_TAIKHOAN = @idtaikhoan)
