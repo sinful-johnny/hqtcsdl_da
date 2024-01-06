@@ -1,0 +1,79 @@
+--Xem, thêm, sửa, xóa số lượng tồn kho
+
+CREATE OR ALTER VIEW V_XEM_THEM_SUA_XOA_SOLUONGTONKHO
+AS
+	SELECT*
+	FROM SO_LUONG_TON_KHO
+GO
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON V_XEM_THEM_SUA_XOA_TTTHUOC TO QUAN_TRI_VIEN	  
+GRANT SELECT, INSERT, UPDATE, DELETE ON V_XEM_THEM_SUA_XOA_SOLUONGTONKHO TO QUAN_TRI_VIEN
+GO
+
+CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
+	@ID_THUOC VARCHAR(255),
+	@tenthuoc NVARCHAR(30) = NULL,
+	@chidinh NVARCHAR(100) = NULL,
+	@ngayhethan DATE = NULL,
+	@giatien MONEY = NULL,
+	@soluong int = NULL
+AS
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+BEGIN TRAN
+	IF (LEN(ISNULL(@tenthuoc, '')) = 0)
+		BEGIN
+			SET @tenthuoc = (SELECT TENTHUOC FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@chidinh, '')) = 0)
+		BEGIN
+			SET @chidinh = (SELECT CHIDINH FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@ngayhethan, '')) = 0)
+		BEGIN
+			SET @ngayhethan = (SELECT NGAYHETHAN FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@giatien, '')) = 0)
+		BEGIN
+			SET @giatien = (SELECT GIATIEN FROM THUOC WHERE ID_THUOC = @ID_THUOC)
+		END
+
+
+	IF (LEN(ISNULL(@soluong, '')) = 0)
+		BEGIN
+			SET @soluong = (SELECT SOLUONG FROM SO_LUONG_TON_KHO WHERE ID_THUOC = @ID_THUOC)
+		END
+
+ 		DECLARE @id_qtv VARCHAR(255)
+		SET @id_qtv = CURRENT_USER
+        
+        -- Khóa để cập nhật
+        SELECT * FROM V_XEM_THEM_SUA_XOA_TTTHUOC WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC;
+
+        -- Chỉ cập nhật nếu dữ liệu không thay đổi
+        UPDATE V_XEM_THEM_SUA_XOA_TTTHUOC
+        SET TENTHUOC = @tenthuoc,
+            CHIDINH = @chidinh,
+            NGAYHETHAN = @ngayhethan,
+            GIATIEN = @giatien
+        WHERE ID_THUOC = @ID_THUOC AND TENTHUOC = @tenthuoc AND CHIDINH = @chidinh AND NGAYHETHAN = @ngayhethan AND GIATIEN = @giatien;
+
+    
+        UPDATE V_XEM_THEM_SUA_XOA_SOLUONGTONKHO
+        SET SOLUONG = @soluong
+        WHERE ID_THUOC = @ID_THUOC
+
+	IF (@@ERROR <> 0)
+		BEGIN
+			RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+
+COMMIT TRAN
+GO
