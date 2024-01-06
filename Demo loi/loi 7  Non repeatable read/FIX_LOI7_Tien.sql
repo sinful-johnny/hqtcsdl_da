@@ -1,0 +1,121 @@
+-- fix chuc nang thanh toan nv == 
+CREATE OR ALTER PROC SP_NV_LAPHOADON
+    @ID_NV VARCHAR(255),
+    @ID_BA VARCHAR(255)
+AS
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN
+    BEGIN TRAN;
+
+    -- Lock rows for update
+    SELECT TOP 1 1 FROM V_DANHMUC_THUOCSD WITH (UPDLOCK) WHERE @ID_BA = ID_BA;
+    SELECT TOP 1 1 FROM V_DICHVU_SD WITH (UPDLOCK) WHERE ID_BA = @ID_BA;
+
+    DECLARE @TONGTIEN MONEY
+    DECLARE @TONGTIENTHUOC MONEY
+    DECLARE @TONGTIENDV MONEY
+
+    SELECT @TONGTIENTHUOC = SUM(THANHTIEN_THUOC)
+    FROM V_DANHMUC_THUOCSD 
+    WHERE @ID_BA = ID_BA
+
+    SELECT @TONGTIENDV = THANHTIEN
+    FROM V_DICHVU_SD
+    WHERE ID_BA = @ID_BA
+
+    SET @TONGTIEN = @TONGTIENTHUOC + @TONGTIENDV
+
+    DECLARE @ID_HOADON VARCHAR(255);
+    SET @ID_HOADON = 'HD' + REPLACE(CONVERT(VARCHAR, GETDATE(), 112), '-', '') + RIGHT('0000' + CAST((SELECT COUNT(*) + 1 FROM HOA_DON) AS VARCHAR), 4);
+
+    BEGIN TRY
+        INSERT INTO V_HOADON_NHANVIEN (ID_HOADON, ID_NV, ID_BA, TONGTIEN, TONGTIENTHUOC, TONGTIENDV)
+        VALUES (@ID_HOADON, @ID_NV, @ID_BA, @TONGTIEN, @TONGTIENTHUOC, @TONGTIENDV);
+
+		UPDATE DICHVU_SD
+        SET ID_HOADON = @ID_HOADON
+        WHERE ID_BA = @ID_BA;
+		WAITFOR DELAY '00:00:20' 
+        SELECT 
+            THUOC.TENTHUOC, 
+            THUOC_SD.SOLUONG, 
+            THUOC.GIATIEN, 
+            THUOC_SD.SOLUONG * THUOC.GIATIEN AS THANHTIEN 
+        FROM 
+            THUOC_SD
+        JOIN 
+            THUOC ON THUOC_SD.ID_THUOC = THUOC.ID_THUOC
+        WHERE 
+            THUOC_SD.ID_BA = @ID_BA;
+
+        COMMIT TRAN;
+        PRINT 'Hoá đơn đã được tạo thành công!';
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRAN;
+        PRINT 'Đã xảy ra lỗi trong quá trình xử lý hoá đơn.';
+    END CATCH
+END
+
+-- fix chuc nang cap nhat thuoc -- 
+CREATE OR ALTER PROC sp_CAPNHAT_TT_THUOC
+    @ID_THUOC VARCHAR(255),
+    @tenthuoc NVARCHAR(30) = NULL,
+    @chidinh NVARCHAR(100) = NULL,
+    @ngayhethan DATE = NULL,
+    @giatien MONEY = NULL,
+    @soluong INT = NULL
+AS
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN TRAN
+    IF (LEN(ISNULL(@tenthuoc, '')) = 0)
+    -- Khóa để cập nhật
+    BEGIN
+        SET @tenthuoc = (SELECT TENTHUOC FROM THUOC WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC)
+    END
+
+    IF (LEN(ISNULL(@chidinh, '')) = 0)
+    BEGIN
+        SET @chidinh = (SELECT CHIDINH FROM THUOC WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC)
+    END
+
+    IF (LEN(ISNULL(@ngayhethan, '')) = 0)
+    BEGIN
+        SET @ngayhethan = (SELECT NGAYHETHAN FROM THUOC WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC)
+    END
+
+    IF (LEN(ISNULL(@giatien, '')) = 0)
+    BEGIN
+        SET @giatien = (SELECT GIATIEN FROM THUOC WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC)
+    END
+
+    IF (LEN(ISNULL(@soluong, '')) = 0)
+    BEGIN
+        SET @soluong = (SELECT SOLUONG FROM SO_LUONG_TON_KHO WITH (UPDLOCK) WHERE ID_THUOC = @ID_THUOC)
+    END
+
+    DECLARE @id_qtv VARCHAR(255)
+    SET @id_qtv = CURRENT_USER
+
+    UPDATE V_XEM_THEM_SUA_XOA_TTTHUOC
+    SET TENTHUOC = @tenthuoc,
+        CHIDINH = @chidinh,
+        NGAYHETHAN = @ngayhethan,
+        GIATIEN = @giatien
+    WHERE ID_THUOC = @ID_THUOC
+
+    UPDATE V_XEM_THEM_SUA_XOA_SOLUONGTONKHO
+    SET ID_THUOC = @ID_THUOC,
+        SOLUONG = @soluong
+    WHERE ID_THUOC = @ID_THUOC
+            
+    IF (@@ERROR <> 0)
+    BEGIN
+        RAISERROR (N'Không thể cập nhật. Vui lòng thử lại', 0, 0)
+        ROLLBACK TRAN
+        RETURN
+    END
+
+    COMMIT TRAN
+END
+
