@@ -1,9 +1,0 @@
-﻿USE QL_NHAKHOA
-GO
-
---sp_xóa thông tin thuốc
-declare	@ID_THUOC varchar(255)
-set @ID_THUOC = '02FEED91-BC50-4351-A896-9C89796E3DE7'
-
-EXEC sp_XOA_TT_THUOC @ID_THUOC
-go
