@@ -1,0 +1,7 @@
+﻿USE QL_NHAKHOA
+GO
+
+--sp_Xem thông tin tài khoản Quản trị viên
+exec sp_XEM_1TAIKHOAN_NGUOIDUNG '1D613AB7-B3B0-4AE4-8B5C-251E46D734D6'
+
+GO

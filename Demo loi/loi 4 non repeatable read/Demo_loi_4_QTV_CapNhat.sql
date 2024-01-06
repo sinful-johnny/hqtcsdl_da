@@ -8,13 +8,17 @@ declare @idthuoc VARCHAR(255),
 		@chidinh NVARCHAR(100) = NULL,
 		@ngayhethan DATE,
 		@giatien money = NULL,
-		@soluong int
+		@soluong int = NULL
 
-set @idthuoc = (select top 1 ID_THUOC
-				from THUOC)
-set @ngayhethan = '2/2/2003'
-set @soluong = 69
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+set @idthuoc = '93A8817E-1C85-426A-B5BB-01A619176468'
+--set @tenthuoc = 'Gabapentin'
+--set @chidinh = N'Đau thần kinh'
+--set @ngayhethan = '2024-12-18'
+--set @giatien = 12500.00
+set @ngayhethan = '2029-12-18'
+set @giatien = 16000.00
+set @soluong = 150
+
 exec sp_CAPNHAT_TT_THUOC @idthuoc, 
 						 @tenthuoc, 
 						 @chidinh,

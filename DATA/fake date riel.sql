@@ -1,36 +1,109 @@
 ﻿use QL_NHAKHOA
 go
 
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Nguyễn Văn A', '01234567890', '1990-01-01', 'nguyenvana@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Trần Thị B', '09876543210', '1985-03-15', 'tranthib@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lê Văn C', '0369842157', '1992-07-22', 'levanc@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Phạm Thị D', '0903124578', '1988-11-10', 'phamthid@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Hoàng Văn E', '0778899443', '1995-05-05', 'hoangvane@gmail.com', '12345678', 'KH'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Đỗ Thị F', '0567321987', '1987-12-30', 'dothif@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Vũ Văn G', '0912345678', '1991-04-18', 'vuvang@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lý Thị H', '0888123456', '1989-09-25', 'lythih@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Nguyễn Văn I', '0999223344', '1993-08-20', 'nguyenvani@gmail.com', '12345678', 'KH'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Trần Văn K', '0333666999', '1986-06-08', 'tranvank@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Phạm Thị L', '0777888999', '1994-02-14', 'phamthil@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Hoàng Văn M', '0888999111', '1990-10-02', 'hoangvanm@gmail.com', '12345678', 'KH'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lê Thị N', '0666777888', '1984-03-27', 'lethin@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Vũ Thị P', '0911122334', '1996-09-15', 'vuthip@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Đỗ Văn Q', '0777999888', '1988-11-01', 'dovanq@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Nguyễn Thị R', '0999888777', '1992-06-03', 'nguyenthir@gmail.com', '12345678', 'KH'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Trần Văn S', '0333444555', '1987-07-12', 'tranvans@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lý Thị T', '0888777666', '1995-04-23', 'lythit@gmail.com', '12345678', 'KH'		
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Phạm Văn U', '0911223344', '1989-12-05', 'phamvanu@gmail.com', '12345678', 'KH'	
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Hoàng Thị V', '0777888999', '1993-08-16', 'hoangthiv@gmail.com', '12345678', 'KH'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Nguyễn Văn An', '01234567891', '1992-05-20', 'nguyenvana_nv@gmail.com', '12345678','NV'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Trần Thị Bình', '09876543212', '1988-12-15', 'tranbinh_nv@gmail.com', '12345678','NV'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lê Văn Cường', '03698421573', '1995-08-22', 'levancuong_nv@gmail.com', '12345678','NV'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Phạm Thị Dung', '09031245782', '1990-04-10', 'phamthidung_nv@gmail.com', '12345678','NV'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Hoàng Văn Dũng', '07788994437', '1987-10-05', 'hoangvandung_nv@gmail.com', '12345678','NS'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Đỗ Thị Eo', '05673219876', '1993-03-30', 'dothieo_nv@gmail.com', '12345678','NS'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Vũ Văn Giao', '09123456789', '1989-02-18', 'vuvangiao_nv@gmail.com', '12345678','NS'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Lý Thị Hằng', '08881234567', '1996-07-25', 'lythihang_nv@gmail.com', '12345678','NS'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Nguyễn Văn Hiển', '09992233445', '1986-11-20', 'nguyenvanhien_nv@gmail.com', '12345678','NS'
-exec sp_THEM_TAIKHOAN_NGUOIDUNG N'Trần Văn Khoa', '03336669996', '1992-02-08', 'tranvankhoa_nv@gmail.com', '12345678','NV'
+CREATE OR ALTER PROC sp_THEM_TAIKHOAN_NGUOIDUNG_QTV
+	@tentaikhoan NVARCHAR(255),
+	@sdt CHAR(11),
+	@ngaysinh DATE,
+	@email VARCHAR(30),
+	@matKhau varchar(100),
+	@loaitaikhoan varchar(20),
+	@id_qtv NVARCHAR(255)
+AS
+BEGIN TRAN
+	--TẠO ID TÀI KHOẢN MỚI
+	DECLARE @ID_TK VARCHAR(255)
+	EXEC sp_TAOID @ID_TK OUTPUT
+
+	--GÁN ID QUẢN TRỊ VIÊN HIỆN TẠI THỰC HIỆN
+	INSERT INTO V_THEM_XOA_SUA_TK(
+									ID_TAIKHOAN,
+									HOTEN,
+									SDT,
+									NGAYSINH,
+									EMAIL,
+									MATKHAU,
+									LOAITK,
+									ID_QTV)
+
+VALUES								(@ID_TK,
+									@tentaikhoan,
+									@sdt,
+									@ngaysinh,
+									@email,
+									@matkhau,
+									@loaitaikhoan,
+									@id_qtv)
+			
+	IF (@@ERROR <> 0)
+		BEGIN
+			RAISERROR (N'Không thể thêm. Vui lòng thử lại', 0, 0)
+			ROLLBACK TRAN
+			RETURN
+		END
+
+COMMIT TRAN
+DECLARE @cmd varchar(200), @username varchar(50)
+IF NOT EXISTS 
+    (SELECT name  
+     FROM master.sys.server_principals
+     WHERE name = @sdt)
+	BEGIN
+		exec sp_addlogin @sdt, @matkhau, 'QL_NHAKHOA'
+	END
+----------------------------------------------
+set @cmd = ' 
+   USE QL_NHAKHOA
+   CREATE USER [' + @ID_TK + ']' + ' FOR LOGIN '+ '[' + @sdt +']'
+PRINT @cmd
+EXEC (@cmd)
+IF (@loaitaikhoan = 'KH')
+	BEGIN
+		exec sp_addrolemember 'KHACHHANG', @ID_TK
+	END
+ELSE IF (@loaitaikhoan = 'NS')
+	BEGIN
+		exec sp_addrolemember 'NHA_SI', @ID_TK
+	END
+ELSE IF (@loaitaikhoan = 'NV')
+	BEGIN
+		exec sp_addrolemember 'NHAN_VIEN', @ID_TK
+	END
+GO
+
+declare @idqtv nvarchar(255)
+set @idqtv = (select ID_TAIKHOAN from TAI_KHOAN where SDT = '0919547701')
+
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Nguyễn Văn A', '01234567890', '1990-01-01', 'nguyenvana@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Trần Thị B', '09876543210', '1985-03-15', 'tranthib@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lê Văn C', '0369842157', '1992-07-22', 'levanc@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Phạm Thị D', '0903124578', '1988-11-10', 'phamthid@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Hoàng Văn E', '0778899443', '1995-05-05', 'hoangvane@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Đỗ Thị F', '0567321987', '1987-12-30', 'dothif@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Vũ Văn G', '0912345678', '1991-04-18', 'vuvang@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lý Thị H', '0888123456', '1989-09-25', 'lythih@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Nguyễn Văn I', '0999223344', '1993-08-20', 'nguyenvani@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Trần Văn K', '0333666999', '1986-06-08', 'tranvank@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Phạm Thị L', '0777888999', '1994-02-14', 'phamthil@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Hoàng Văn M', '0888999111', '1990-10-02', 'hoangvanm@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lê Thị N', '0666777888', '1984-03-27', 'lethin@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Vũ Thị P', '0911122334', '1996-09-15', 'vuthip@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Đỗ Văn Q', '0777999888', '1988-11-01', 'dovanq@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Nguyễn Thị R', '0999888777', '1992-06-03', 'nguyenthir@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Trần Văn S', '0333444555', '1987-07-12', 'tranvans@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lý Thị T', '0888777666', '1995-04-23', 'lythit@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Phạm Văn U', '0911223344', '1989-12-05', 'phamvanu@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Hoàng Thị V', '0777888999', '1993-08-16', 'hoangthiv@gmail.com', '12345678', 'KH', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Nguyễn Văn An', '01234567891', '1992-05-20', 'nguyenvana_nv@gmail.com', '12345678','NV', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Trần Thị Bình', '09876543212', '1988-12-15', 'tranbinh_nv@gmail.com', '12345678','NV', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lê Văn Cường', '03698421573', '1995-08-22', 'levancuong_nv@gmail.com', '12345678','NV', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Phạm Thị Dung', '09031245782', '1990-04-10', 'phamthidung_nv@gmail.com', '12345678','NV', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Hoàng Văn Dũng', '07788994437', '1987-10-05', 'hoangvandung_nv@gmail.com', '12345678','NS', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Đỗ Thị Eo', '05673219876', '1993-03-30', 'dothieo_nv@gmail.com', '12345678','NS', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Vũ Văn Giao', '09123456789', '1989-02-18', 'vuvangiao_nv@gmail.com', '12345678','NS', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Lý Thị Hằng', '08881234567', '1996-07-25', 'lythihang_nv@gmail.com', '12345678','NS', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Nguyễn Văn Hiển', '09992233445', '1986-11-20', 'nguyenvanhien_nv@gmail.com', '12345678','NS', @idqtv
+exec sp_THEM_TAIKHOAN_NGUOIDUNG_QTV N'Trần Văn Khoa', '03336669996', '1992-02-08', 'tranvankhoa_nv@gmail.com', '12345678','NV', @idqtv
 go
 
 INSERT INTO THUOC VALUES
@@ -41,17 +114,17 @@ INSERT INTO THUOC VALUES
 (cast(NEWID() as varchar(255)), 'Omeprazole',			N'Dạ dày', '2024-12-25', 15000,								(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Aspirin',				N'Chống đông máu', '2024-01-10', 8000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543213')),
 (cast(NEWID() as varchar(255)), 'Simvastatin',			N'Hạ cholesterol', '2024-12-30', 9000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '01234567892')),
-(cast(NEWID() as varchar(255)), 'Losartan',				N'Hạ huyết áp', '2024-01-05', 11000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
+(cast(NEWID() as varchar(255)), 'Losartan',				N'Hạ huyết áp', '2025-01-05', 11000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
 (cast(NEWID() as varchar(255)), 'Metformin',			N'Điều trị tiểu đường', '2024-12-28', 13000,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Warfarin',				N'Chống đông máu', '2024-01-20', 16000,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Lisinopril',			N'Hạ huyết áp', '2024-12-23', 9500,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Atorvastatin',			N'Hạ cholesterol', '2024-01-08', 10500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09876543213')),
 (cast(NEWID() as varchar(255)), 'Gabapentin',			N'Đau thần kinh', '2024-12-18', 12500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
-(cast(NEWID() as varchar(255)), 'Amlodipine',			N'Hạ huyết áp', '2024-01-03', 14500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
+(cast(NEWID() as varchar(255)), 'Amlodipine',			N'Hạ huyết áp', '2025-01-03', 14500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Metoprolol',			N'Hạ nhịp tim', '2024-12-22', 15500,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574')),
-(cast(NEWID() as varchar(255)), 'Hydrochlorothiazide',	N'Điều trị tiểu đường', '2024-01-12', 10200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
+(cast(NEWID() as varchar(255)), 'Hydrochlorothiazide',	N'Điều trị tiểu đường', '2024-02-12', 10200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Prednisone',			N'Chống viêm', '2024-12-26', 13200,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
-(cast(NEWID() as varchar(255)), 'Diazepam',				N'Lo lắng, căng thẳng', '2024-01-18', 14200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
+(cast(NEWID() as varchar(255)), 'Diazepam',				N'Lo lắng, căng thẳng', '2024-02-18', 14200,				(select ID_TAIKHOAN from TAI_KHOAN where SDT = '07788994438')),
 (cast(NEWID() as varchar(255)), 'Tramadol',				N'Đau mạch và cơ', '2024-12-29', 15200,						(select ID_TAIKHOAN from TAI_KHOAN where SDT = '09031245783')),
 (cast(NEWID() as varchar(255)), 'Morphine',				N'Đau nặng', '2024-01-14', 17000,							(select ID_TAIKHOAN from TAI_KHOAN where SDT = '03698421574'));
 go
