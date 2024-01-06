@@ -1,6 +1,6 @@
 ﻿use QL_NHAKHOA
 go
---drop proc sp_CAPNHAT_TT_THUOC
+drop proc sp_CAPNHAT_TT_THUOC
 drop proc sp_CAPNHAT_TT_THUOC_THONGTIN_SOLUONG
 drop proc sp_CAPNHAT_TT_THUOC_SOLUONG_THONGTIN
 go
