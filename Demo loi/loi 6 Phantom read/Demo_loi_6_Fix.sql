@@ -36,17 +36,18 @@ BEGIN
 
 		waitfor delay '00:00:10'
 
-        SELECT 
-            THUOC.TENTHUOC, 
-            THUOC_SD.SOLUONG, 
-            THUOC.GIATIEN, 
-            THUOC_SD.SOLUONG * THUOC.GIATIEN AS THANHTIEN 
-        FROM 
-            THUOC_SD
-        JOIN 
-            THUOC ON THUOC_SD.ID_THUOC = THUOC.ID_THUOC
-        WHERE 
-            THUOC_SD.ID_BA = @ID_BA;
+        SELECT HD.ID_HOADON, DVSD.*
+		FROM HOA_DON as HD
+			inner join BENH_AN as BA on BA.ID_BA = HD.ID_BA
+			inner join DICHVU_SD as DVSD on BA.ID_BA = DVSD.ID_BA
+		where	HD.ID_HOADON = @ID_HOADON
+
+		SELECT HD.ID_HOADON, TSD.*, TSD.SOLUONG * THUOC.GIATIEN as THANHTIEN
+		FROM HOA_DON as HD
+			inner join BENH_AN as BA on BA.ID_BA = HD.ID_BA
+			inner join THUOC_SD as TSD on TSD.ID_BA = HD.ID_BA
+			inner join THUOC on THUOC.ID_THUOC = TSD.ID_THUOC
+		where	HD.ID_HOADON = @ID_HOADON
 
         COMMIT TRAN;
         PRINT 'Hoá đơn đã được tạo thành công!';

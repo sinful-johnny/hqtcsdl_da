@@ -12,7 +12,7 @@ where	TK.SDT = '0888123456'
 
 select @ID_THUOC = ID_THUOC
 from THUOC
-where TENTHUOC = 'Diazepam'
+where TENTHUOC = 'Atorvastatin'
 
 exec SP_NS_THEM_THUOC_SD @ID_BA, @ID_THUOC, @SOLUONG
 go
